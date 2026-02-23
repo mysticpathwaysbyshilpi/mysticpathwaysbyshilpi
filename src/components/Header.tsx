@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
         <header className="glass-header">
             <div className="container" style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                    <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
+                    <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
                         <div style={{
                             width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                             boxShadow: 'var(--shadow-soft)', borderRadius: '20px', overflow: 'hidden', backgroundColor: '#fff'
@@ -51,10 +51,10 @@ export const Header: React.FC = () => {
                         </span>
                     </Link>
                     <nav style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', fontSize: '0.9rem', fontWeight: '500' }}>
-                        <Link href="/">{t('common.home')}</Link>
-                        <Link href="/about">{t('common.about')}</Link>
-                        <Link href="/services">{t('common.services')}</Link>
-                        <Link href="/contact">{t('common.contact')}</Link>
+                        <Link href="/" prefetch={false}>{t('common.home')}</Link>
+                        <Link href="/about" prefetch={false}>{t('common.about')}</Link>
+                        <Link href="/services" prefetch={false}>{t('common.services')}</Link>
+                        <Link href="/contact" prefetch={false}>{t('common.contact')}</Link>
                     </nav>
                 </div>
 
@@ -147,7 +147,7 @@ export const Header: React.FC = () => {
                         )}
                     </div>
 
-                    <Link href="/book" className="btn btn-primary" style={{ padding: '0.6rem 1.2rem', fontSize: '0.8rem' }}>
+                    <Link href="/book" prefetch={false} className="btn btn-primary" style={{ padding: '0.6rem 1.2rem', fontSize: '0.8rem' }}>
                         {t('common.bookNow')}
                     </Link>
                 </div>

@@ -36,10 +36,10 @@ export const Footer: React.FC = () => {
                     {/* Quick Links */}
                     <div className="flex-col" style={{ gap: '1rem' }}>
                         <h4 style={{ fontWeight: '600' }}>Useful Links</h4>
-                        <Link href="/about" style={{ color: 'var(--fg-secondary)' }}>{t('common.about')}</Link>
-                        <Link href="/services" style={{ color: 'var(--fg-secondary)' }}>{t('common.services')}</Link>
-                        <Link href="/book" style={{ color: 'var(--fg-secondary)' }}>{t('common.bookNow')}</Link>
-                        <Link href="/legal" style={{ color: 'var(--fg-secondary)' }}>Privacy & Legal</Link>
+                        <Link href="/about" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.about')}</Link>
+                        <Link href="/services" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.services')}</Link>
+                        <Link href="/book" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.bookNow')}</Link>
+                        <Link href="/legal" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>Privacy & Legal</Link>
                     </div>
 
                     {/* Contact Info */}
