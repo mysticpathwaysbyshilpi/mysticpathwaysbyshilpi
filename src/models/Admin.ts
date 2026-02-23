@@ -12,5 +12,4 @@ const AdminSchema = new mongoose.Schema({
     }
 });
 
-// For Next.js hot reloading
 export default mongoose.models.Admin || mongoose.model('Admin', AdminSchema);
