@@ -1,7 +1,7 @@
-import { Header } from '@/components/Header';
-import { Hero } from '@/components/Hero';
-import { ServiceSection } from '@/components/ServiceSection';
-import { Newsletter } from '@/components/Newsletter';
+import { Header } from '../components/Header';
+import { Hero } from '../components/Hero';
+import { ServiceSection } from '../components/ServiceSection';
+import { Newsletter } from '../components/Newsletter';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600; // Refresh once per hour

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AppProvider } from "@/context/AppContext";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { ArattaiButton } from "@/components/ArattaiButton";
-import { Footer } from "@/components/Footer";
+import { AppProvider } from '../context/AppContext';
+import { Header } from '../components/Header';
+import { WhatsAppButton } from '../components/WhatsAppButton';
+import { ArattaiButton } from '../components/ArattaiButton';
+import { Footer } from '../components/Footer';
 
 export const metadata: Metadata = {
   title: "Mystic Pathways by Shilpi | Reiki, Tarot & Numerology",

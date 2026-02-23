@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Header } from '../../components/Header';
-import { useAppContext } from '../../context/AppContext';
+import { Header } from '../../../components/Header';
+import { useAppContext } from '../../../context/AppContext';
 import { useRouter } from 'next/navigation';
 
 interface ContactRequest {

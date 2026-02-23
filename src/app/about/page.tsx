@@ -1,7 +1,7 @@
 'use client';
 
-import { Header } from '@/components/Header';
-import { useAppContext } from '@/context/AppContext';
+import { Header } from '../../components/Header';
+import { useAppContext } from '../../context/AppContext';
 
 export const dynamic = 'force-static';
 
