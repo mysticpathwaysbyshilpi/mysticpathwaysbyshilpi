@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI;
-
-if (!MONGODB_URI) {
-    throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
-}
-
+// Standard Mongoose connection caching for Next.js
 let cached = (global as any).mongoose;
 
 if (!cached) {
@@ -17,16 +12,38 @@ async function dbConnect() {
         return cached.conn;
     }
 
+    const MONGODB_URI = process.env.MONGODB_URI;
+
+    if (!MONGODB_URI) {
+        throw new Error('MONGODB_URI environment variable is missing in production.');
+    }
+
     if (!cached.promise) {
         const opts = {
             bufferCommands: false,
+            // Resource Management for Production (Hostinger)
+            maxPoolSize: 10,
+            serverSelectionTimeoutMS: 8000,
+            socketTimeoutMS: 45000,
         };
 
-        cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
-            return mongoose;
-        });
+        cached.promise = mongoose.connect(MONGODB_URI!, opts)
+            .then((mongoose) => {
+                return mongoose;
+            })
+            .catch((err) => {
+                cached.promise = null; // Clear promise on failure to allow retry
+                throw err;
+            });
     }
-    cached.conn = await cached.promise;
+
+    try {
+        cached.conn = await cached.promise;
+    } catch (e) {
+        cached.promise = null; // Ensure retry is possible on next request
+        throw e;
+    }
+
     return cached.conn;
 }
 
