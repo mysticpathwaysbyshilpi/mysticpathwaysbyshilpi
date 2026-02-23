@@ -24,10 +24,10 @@ async function dbConnect() {
     if (!cached!.promise) {
         const opts = {
             bufferCommands: false,
-            // Production Optimizations for Hostinger
-            serverSelectionTimeoutMS: 5000, // Fail fast if DB unreachable
-            socketTimeoutMS: 30000,         // Prevent long-lived hung sockets
-            maxPoolSize: 5,                // Small pool to conserve server resources
+            // Strict resource conservation for Hostinger
+            serverSelectionTimeoutMS: 3000,
+            socketTimeoutMS: 15000,
+            maxPoolSize: 3,
         };
 
         cached!.promise = mongoose.connect(MONGODB_URI!, opts)
