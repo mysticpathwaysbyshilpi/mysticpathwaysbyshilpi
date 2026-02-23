@@ -18,6 +18,9 @@ async function dbConnect() {
     const MONGODB_URI = process.env.MONGODB_URI;
 
     if (!MONGODB_URI) {
+        const envKeys = Object.keys(process.env).filter(k => !k.includes('SECRET') && !k.includes('PASSWORD') && !k.includes('KEY'));
+        console.error('DATABASE_ERROR: MONGODB_URI is missing.');
+        console.error('Available Environment Keys:', envKeys);
         throw new Error('MONGODB_URI is not defined. Please check your environment variables.');
     }
 
