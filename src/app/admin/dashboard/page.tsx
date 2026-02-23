@@ -962,93 +962,95 @@ export default function AdminDashboard() {
             {/* Settings Modal */}
             {showSettingsModal && (
                 <div className="modal-overlay flex-center" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', zIndex: 1000, padding: '2rem' }}>
-                    <div className="glass-panel" style={{ width: '100%', maxWidth: '700px', maxHeight: '90vh', overflowY: 'auto', padding: '3rem', position: 'relative', animation: 'fadeIn 0.3s ease-out' }}>
+                    <div className="glass-panel" style={{ width: '100%', maxWidth: '700px', position: 'relative', animation: 'fadeIn 0.3s ease-out', overflow: 'hidden', borderRadius: '24px' }}>
                         <button
                             onClick={() => setShowSettingsModal(false)}
-                            style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: 'var(--fg-secondary)', fontSize: '1.5rem', cursor: 'pointer' }}
+                            style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.05)', border: 'none', color: 'var(--fg-secondary)', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
                             ✕
                         </button>
-                        <h2 style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }}>Divine Settings</h2>
-                        <p style={{ color: 'var(--fg-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>Configure your Cal.com link and session variants.</p>
+                        <div style={{ maxHeight: '85vh', overflowY: 'auto', padding: '3.5rem 3rem 3rem' }} className="custom-scroll">
+                            <h2 style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }}>Divine Settings</h2>
+                            <p style={{ color: 'var(--fg-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>Configure your Cal.com link and session variants.</p>
 
-                        <form onSubmit={handleUpdateSettings}>
-                            <div className="form-group" style={{ marginBottom: '2rem' }}>
-                                <label style={{ display: 'block', marginBottom: '0.75rem', fontSize: '0.9rem', color: 'var(--fg-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Default Cal.com Link</label>
-                                <div style={{ position: 'relative' }}>
-                                    <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }}>🔗</span>
-                                    <input
-                                        type="text"
-                                        required
-                                        placeholder="e.g. shilpi/reiki-session"
-                                        value={calComLink}
-                                        onChange={(e) => setCalComLink(e.target.value)}
-                                        className="premium-input"
-                                        style={{ paddingLeft: '2.5rem' }}
-                                    />
-                                </div>
-                                <p style={{ fontSize: '0.75rem', color: 'var(--fg-secondary)', marginTop: '0.5rem', opacity: 0.8 }}>Enter just the link portion from your Cal.com event page.</p>
-                            </div>
-
-                            <div style={{ marginBottom: '2rem' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-                                    <label style={{ fontSize: '0.9rem', color: 'var(--fg-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Session Variants</label>
-                                    <button type="button" onClick={addMeetingType} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.75rem', borderRadius: '8px' }}>+ Add Sacred Variant</button>
+                            <form onSubmit={handleUpdateSettings}>
+                                <div className="form-group" style={{ marginBottom: '2rem' }}>
+                                    <label style={{ display: 'block', marginBottom: '0.75rem', fontSize: '0.9rem', color: 'var(--fg-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Default Cal.com Link</label>
+                                    <div style={{ position: 'relative' }}>
+                                        <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', opacity: 0.5 }}>🔗</span>
+                                        <input
+                                            type="text"
+                                            required
+                                            placeholder="e.g. shilpi/reiki-session"
+                                            value={calComLink}
+                                            onChange={(e) => setCalComLink(e.target.value)}
+                                            className="premium-input"
+                                            style={{ paddingLeft: '2.5rem' }}
+                                        />
+                                    </div>
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--fg-secondary)', marginTop: '0.5rem', opacity: 0.8 }}>Enter just the link portion from your Cal.com event page.</p>
                                 </div>
 
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '350px', overflowY: 'auto', paddingRight: '0.5rem' }} className="custom-scroll">
-                                    {meetingTypes.map((m) => (
-                                        <div key={m.id} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', backgroundColor: 'rgba(var(--accent-primary-rgb), 0.03)', padding: '1.25rem', borderRadius: '16px', border: '1px solid var(--border-light)', animation: 'fadeIn 0.2s ease-out' }}>
-                                            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                                <input
-                                                    type="text"
-                                                    placeholder="Session Label (e.g. 60 min Reiki)"
-                                                    value={m.label}
-                                                    onChange={(e) => updateMeetingType(m.id, 'label', e.target.value)}
-                                                    className="premium-input"
-                                                    style={{ fontSize: '0.9rem', padding: '0.6rem 1rem' }}
-                                                />
-                                                <input
-                                                    type="text"
-                                                    placeholder="Cal.com Link (e.g. shilpi/reiki-60)"
-                                                    value={m.link}
-                                                    onChange={(e) => updateMeetingType(m.id, 'link', e.target.value)}
-                                                    className="premium-input"
-                                                    style={{ fontSize: '0.9rem', padding: '0.6rem 1rem' }}
-                                                />
+                                <div style={{ marginBottom: '2rem' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                                        <label style={{ fontSize: '0.9rem', color: 'var(--fg-secondary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Session Variants</label>
+                                        <button type="button" onClick={addMeetingType} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.75rem', borderRadius: '8px' }}>+ Add Sacred Variant</button>
+                                    </div>
+
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                        {meetingTypes.map((m) => (
+                                            <div key={m.id} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', backgroundColor: 'rgba(var(--accent-primary-rgb), 0.03)', padding: '1.25rem', borderRadius: '16px', border: '1px solid var(--border-light)', animation: 'fadeIn 0.2s ease-out' }}>
+                                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Session Label (e.g. 60 min Reiki)"
+                                                        value={m.label}
+                                                        onChange={(e) => updateMeetingType(m.id, 'label', e.target.value)}
+                                                        className="premium-input"
+                                                        style={{ fontSize: '0.9rem', padding: '0.6rem 1rem' }}
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Cal.com Link (e.g. shilpi/reiki-60)"
+                                                        value={m.link}
+                                                        onChange={(e) => updateMeetingType(m.id, 'link', e.target.value)}
+                                                        className="premium-input"
+                                                        style={{ fontSize: '0.9rem', padding: '0.6rem 1rem' }}
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => removeMeetingType(m.id)}
+                                                    style={{
+                                                        width: '40px', height: '40px',
+                                                        background: 'rgba(244,67,54,0.1)',
+                                                        border: 'none', color: '#f44336',
+                                                        borderRadius: '10px', cursor: 'pointer',
+                                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                        transition: '0.2s'
+                                                    }}
+                                                    className="delete-btn"
+                                                >
+                                                    🗑️
+                                                </button>
                                             </div>
-                                            <button
-                                                type="button"
-                                                onClick={() => removeMeetingType(m.id)}
-                                                style={{
-                                                    width: '40px', height: '40px',
-                                                    background: 'rgba(244,67,54,0.1)',
-                                                    border: 'none', color: '#f44336',
-                                                    borderRadius: '10px', cursor: 'pointer',
-                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                    transition: '0.2s'
-                                                }}
-                                                className="delete-btn"
-                                            >
-                                                🗑️
-                                            </button>
-                                        </div>
-                                    ))}
-                                    {meetingTypes.length === 0 && (
-                                        <div style={{ textAlign: 'center', padding: '2rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px dashed var(--border-light)' }}>
-                                            <p style={{ fontSize: '0.85rem', color: 'var(--fg-secondary)', fontStyle: 'italic' }}>No session variants added. The default link will be used for all appointments.</p>
-                                        </div>
-                                    )}
+                                        ))}
+                                        {meetingTypes.length === 0 && (
+                                            <div style={{ textAlign: 'center', padding: '2rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px dashed var(--border-light)' }}>
+                                                <p style={{ fontSize: '0.85rem', color: 'var(--fg-secondary)', fontStyle: 'italic' }}>No session variants added. The default link will be used for all appointments.</p>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
 
-                            {settingsStatus.error && <p style={{ color: '#f44336', fontSize: '0.9rem', marginBottom: '1rem' }}>{settingsStatus.error}</p>}
-                            {settingsStatus.success && <p style={{ color: '#4caf50', fontSize: '0.9rem', marginBottom: '1rem' }}>{settingsStatus.success}</p>}
+                                {settingsStatus.error && <p style={{ color: '#f44336', fontSize: '0.9rem', marginBottom: '1rem' }}>{settingsStatus.error}</p>}
+                                {settingsStatus.success && <p style={{ color: '#4caf50', fontSize: '0.9rem', marginBottom: '1rem' }}>{settingsStatus.success}</p>}
 
-                            <button type="submit" className="btn btn-primary" disabled={settingsStatus.loading} style={{ width: '100%', padding: '1rem' }}>
-                                {settingsStatus.loading ? 'Updating Sanctuary...' : 'Save Divine Settings'}
-                            </button>
-                        </form>
+                                <button type="submit" className="btn btn-primary" disabled={settingsStatus.loading} style={{ width: '100%', padding: '1rem' }}>
+                                    {settingsStatus.loading ? 'Updating Sanctuary...' : 'Save Divine Settings'}
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             )}
