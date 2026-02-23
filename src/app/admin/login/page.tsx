@@ -10,6 +10,7 @@ export default function AdminLogin() {
     const router = useRouter();
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
+    const [errorMsg, setErrorMsg] = useState('');
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -25,9 +26,12 @@ export default function AdminLogin() {
             if (res.ok) {
                 router.push('/admin/dashboard');
             } else {
+                const data = await res.json();
+                setErrorMsg(data.error || 'Divine key rejected.');
                 setStatus('error');
             }
-        } catch (error) {
+        } catch (error: any) {
+            setErrorMsg(error.message || 'Connection failure.');
             setStatus('error');
         }
     };
@@ -79,7 +83,7 @@ export default function AdminLogin() {
 
                     {status === 'error' && (
                         <p style={{ color: '#f44336', fontSize: '0.85rem', fontWeight: 500 }}>
-                            ⚠️ Invalid password. Please try again.
+                            ⚠️ {errorMsg}
                         </p>
                     )}
                 </form>

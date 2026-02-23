@@ -77,9 +77,12 @@ export default function Contact() {
                 setStatus('success');
                 (e.target as HTMLFormElement).reset();
             } else {
+                const data = await res.json();
+                setErrorMsg(data.error || 'The message could not reach the sanctuary.');
                 setStatus('error');
             }
-        } catch (error) {
+        } catch (error: any) {
+            setErrorMsg(error.message || 'Connection failure.');
             setStatus('error');
         }
     };
@@ -171,7 +174,7 @@ export default function Contact() {
                         </button>
 
                         {status === 'success' && <p style={{ color: '#4caf50', textAlign: 'center', fontWeight: 500 }}>✨ Message sent successfully!</p>}
-                        {status === 'error' && <p style={{ color: '#f44336', textAlign: 'center', fontWeight: 500 }}>❌ Error sending message. Please try again.</p>}
+                        {status === 'error' && <p style={{ color: '#f44336', textAlign: 'center', fontWeight: 500 }}>❌ {errorMsg}</p>}
                         {status === 'validation-error' && <p style={{ color: '#ff9800', textAlign: 'center', fontWeight: 500 }}>⚠️ {errorMsg}</p>}
                     </form>
                 </div>

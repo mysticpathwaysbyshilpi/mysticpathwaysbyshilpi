@@ -13,8 +13,4 @@ const AdminSchema = new mongoose.Schema({
 });
 
 // For Next.js hot reloading
-if (mongoose.models.Admin) {
-    delete (mongoose.models as any).Admin;
-}
-
 export default mongoose.models.Admin || mongoose.model('Admin', AdminSchema);
