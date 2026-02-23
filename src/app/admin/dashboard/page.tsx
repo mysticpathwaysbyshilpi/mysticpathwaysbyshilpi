@@ -195,7 +195,14 @@ export default function AdminDashboard() {
                     const result = await res.json();
                     setContacts(result.data);
                     setTotalPages(result.pagination.pages);
-                } else {
+                    // Update counts from API response metadata
+                    if (result.counts) {
+                        setCounts(prev => ({
+                            ...prev,
+                            active: result.counts.active,
+                            archived: result.counts.archived
+                        }));
+                    }
                     let errData;
                     try {
                         errData = await res.json();
@@ -564,6 +571,47 @@ export default function AdminDashboard() {
                     <div className="glass-panel flex-center" style={{ padding: '5rem', textAlign: 'center' }}>
                         <p style={{ color: 'var(--fg-secondary)', fontSize: '1.2rem' }}>No {view} data in the sanctuary.</p>
                     </div>
+                ) : view === 'newsletter' ? (
+                    <div className="glass-panel" style={{ overflowX: 'auto', padding: '1rem', borderRadius: '16px' }}>
+                        <table style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+                            <thead>
+                                <tr style={{ backgroundColor: 'rgba(var(--accent-primary-rgb), 0.08)', borderBottom: '2px solid var(--accent-primary)' }}>
+                                    <th style={{ padding: '1.2rem 1rem', width: '40px' }}>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedIds.length === newsletterTotal && newsletterTotal > 0}
+                                            onChange={toggleSelectAll}
+                                            style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                                        />
+                                    </th>
+                                    <th style={{ padding: '1.2rem 1rem', color: 'var(--accent-primary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Subscribed Date</th>
+                                    <th style={{ padding: '1.2rem 1rem', color: 'var(--accent-primary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Email Address</th>
+                                    <th style={{ padding: '1.2rem 1rem', color: 'var(--accent-primary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {subscribers.map((subscriber, index) => (
+                                    <tr key={subscriber._id} style={{ borderBottom: '1px solid var(--glass-border)', backgroundColor: selectedIds.includes(subscriber._id) ? 'rgba(var(--accent-primary-rgb), 0.12)' : index % 2 === 0 ? 'transparent' : 'rgba(var(--accent-primary-rgb), 0.02)' }}>
+                                        <td style={{ padding: '1rem' }}>
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedIds.includes(subscriber._id)}
+                                                onChange={() => toggleSelect(subscriber._id)}
+                                                style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                                            />
+                                        </td>
+                                        <td style={{ padding: '1rem', fontSize: '0.85rem' }}>
+                                            {new Date(subscriber.subscribedAt).toLocaleString()}
+                                        </td>
+                                        <td style={{ padding: '1rem', fontWeight: 600 }}>{subscriber.email}</td>
+                                        <td style={{ padding: '1rem' }}>
+                                            <span style={{ padding: '4px 10px', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 600, backgroundColor: 'rgba(76, 175, 80, 0.1)', color: '#4caf50' }}>ACTIVE</span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 ) : view === 'bookings' ? (
                     <div className="glass-panel" style={{ overflowX: 'auto', padding: '1rem', borderRadius: '16px' }}>
                         <table style={{ width: '100%', minWidth: '1000px', borderCollapse: 'collapse', textAlign: 'left' }}>
@@ -913,7 +961,7 @@ export default function AdminDashboard() {
             {/* Settings Modal */}
             {showSettingsModal && (
                 <div className="modal-overlay flex-center" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', zIndex: 1000, padding: '2rem' }}>
-                    <div className="glass-panel" style={{ width: '100%', maxWidth: '700px', padding: '3rem', position: 'relative', animation: 'fadeIn 0.3s ease-out' }}>
+                    <div className="glass-panel" style={{ width: '100%', maxWidth: '700px', maxHeight: '90vh', overflowY: 'auto', padding: '3rem', position: 'relative', animation: 'fadeIn 0.3s ease-out' }}>
                         <button
                             onClick={() => setShowSettingsModal(false)}
                             style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: 'var(--fg-secondary)', fontSize: '1.5rem', cursor: 'pointer' }}

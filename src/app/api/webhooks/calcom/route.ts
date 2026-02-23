@@ -9,18 +9,23 @@ export async function POST(req: Request) {
         const signature = req.headers.get('x-cal-signature-256');
         const webhookSecret = process.env.CALCOM_WEBHOOK_SECRET;
 
+        const body = JSON.parse(rawBody);
+        const { triggerEvent, payload } = body;
+
+        console.log(`CALCOM_WEBHOOK: Received ${triggerEvent} with UID ${payload?.uid}`);
+
         // Verify signature if secret is configured
         if (webhookSecret && signature) {
             const hmac = crypto.createHmac('sha256', webhookSecret);
             const digest = hmac.update(rawBody).digest('hex');
             if (signature !== digest) {
-                console.error('Invalid Cal.com webhook signature');
+                console.error('CALCOM_WEBHOOK_ERROR: Invalid signature check failed');
                 return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
             }
+            console.log('CALCOM_WEBHOOK: Signature verified successfully');
+        } else if (!signature) {
+            console.warn('CALCOM_WEBHOOK_WARNING: No signature provided in headers');
         }
-
-        const body = JSON.parse(rawBody);
-        const { triggerEvent, payload } = body;
 
         if (!payload) {
             return NextResponse.json({ error: 'No payload provided' }, { status: 400 });
