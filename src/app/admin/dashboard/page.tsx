@@ -812,6 +812,153 @@ export default function AdminDashboard() {
                     </div>
                 </div>
             </div>
+            {/* Reading Message Modal */}
+            {readingMessage && (
+                <div className="modal-overlay flex-center" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', zIndex: 1000, padding: '2rem' }}>
+                    <div className="glass-panel" style={{ width: '100%', maxWidth: '600px', padding: '3rem', position: 'relative', animation: 'fadeIn 0.3s ease-out' }}>
+                        <button
+                            onClick={() => setReadingMessage(null)}
+                            style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: 'var(--fg-secondary)', fontSize: '1.5rem', cursor: 'pointer' }}
+                        >
+                            ✕
+                        </button>
+                        <h2 style={{ color: 'var(--accent-primary)', marginBottom: '2rem', fontSize: '1.8rem' }}>Divine Message</h2>
+                        <div style={{ color: 'var(--fg-primary)', lineHeight: '1.8', fontSize: '1.1rem', whiteSpace: 'pre-wrap', maxHeight: '60vh', overflowY: 'auto', paddingRight: '1rem' }}>
+                            {readingMessage}
+                        </div>
+                        <div style={{ marginTop: '3rem', textAlign: 'right' }}>
+                            <button onClick={() => setReadingMessage(null)} className="btn btn-primary" style={{ padding: '0.75rem 2rem' }}>
+                                Acknowledge
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Change Password Modal */}
+            {showPasswordModal && (
+                <div className="modal-overlay flex-center" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', zIndex: 1000, padding: '2rem' }}>
+                    <div className="glass-panel" style={{ width: '100%', maxWidth: '500px', padding: '3rem', position: 'relative', animation: 'fadeIn 0.3s ease-out' }}>
+                        <button
+                            onClick={() => setShowPasswordModal(false)}
+                            style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: 'var(--fg-secondary)', fontSize: '1.5rem', cursor: 'pointer' }}
+                        >
+                            ✕
+                        </button>
+                        <h2 style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }}>Sacred Password</h2>
+                        <p style={{ color: 'var(--fg-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>Update your access credentials for the divine sanctuary.</p>
+
+                        <form onSubmit={handleChangePassword} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                            <div className="form-group">
+                                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--fg-secondary)' }}>Current Password</label>
+                                <input
+                                    type="password"
+                                    required
+                                    value={passwordData.current}
+                                    onChange={(e) => setPasswordData({ ...passwordData, current: e.target.value })}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--fg-secondary)' }}>New Password</label>
+                                <input
+                                    type="password"
+                                    required
+                                    value={passwordData.new}
+                                    onChange={(e) => setPasswordData({ ...passwordData, new: e.target.value })}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--fg-secondary)' }}>Confirm New Password</label>
+                                <input
+                                    type="password"
+                                    required
+                                    value={passwordData.confirm}
+                                    onChange={(e) => setPasswordData({ ...passwordData, confirm: e.target.value })}
+                                />
+                            </div>
+
+                            {passwordStatus.error && <p style={{ color: '#f44336', fontSize: '0.9rem' }}>{passwordStatus.error}</p>}
+                            {passwordStatus.success && <p style={{ color: '#4caf50', fontSize: '0.9rem' }}>{passwordStatus.success}</p>}
+
+                            <button type="submit" className="btn btn-primary" disabled={passwordStatus.loading} style={{ marginTop: '1rem', padding: '1rem' }}>
+                                {passwordStatus.loading ? 'Updating...' : 'Update Password'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Settings Modal */}
+            {showSettingsModal && (
+                <div className="modal-overlay flex-center" style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', zIndex: 1000, padding: '2rem' }}>
+                    <div className="glass-panel" style={{ width: '100%', maxWidth: '700px', padding: '3rem', position: 'relative', animation: 'fadeIn 0.3s ease-out' }}>
+                        <button
+                            onClick={() => setShowSettingsModal(false)}
+                            style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', color: 'var(--fg-secondary)', fontSize: '1.5rem', cursor: 'pointer' }}
+                        >
+                            ✕
+                        </button>
+                        <h2 style={{ color: 'var(--accent-primary)', marginBottom: '1.5rem' }}>Divine Settings</h2>
+                        <p style={{ color: 'var(--fg-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>Configure your Cal.com link and session variants.</p>
+
+                        <form onSubmit={handleUpdateSettings}>
+                            <div className="form-group" style={{ marginBottom: '2rem' }}>
+                                <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--fg-secondary)', fontWeight: 600 }}>Default Cal.com Link</label>
+                                <input
+                                    type="text"
+                                    required
+                                    placeholder="e.g. shilpi/reiki-session"
+                                    value={calComLink}
+                                    onChange={(e) => setCalComLink(e.target.value)}
+                                    style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--border-light)', backgroundColor: 'rgba(255,255,255,0.05)', color: 'white' }}
+                                />
+                                <p style={{ fontSize: '0.75rem', color: 'var(--fg-secondary)', marginTop: '0.5rem' }}>Enter just the link portion from Cal.com.</p>
+                            </div>
+
+                            <div style={{ marginBottom: '2rem' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                    <label style={{ fontSize: '0.9rem', color: 'var(--fg-secondary)', fontWeight: 600 }}>Session Variants</label>
+                                    <button type="button" onClick={addMeetingType} className="btn btn-secondary" style={{ padding: '0.4rem 1rem', fontSize: '0.8rem' }}>+ Add Variant</button>
+                                </div>
+
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '300px', overflowY: 'auto', paddingRight: '0.5rem' }}>
+                                    {meetingTypes.map((m) => (
+                                        <div key={m.id} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-light)' }}>
+                                            <div style={{ flex: 1 }}>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Label (e.g. 60 min Reiki)"
+                                                    value={m.label}
+                                                    onChange={(e) => updateMeetingType(m.id, 'label', e.target.value)}
+                                                    style={{ width: '100%', padding: '0.6rem', marginBottom: '0.5rem' }}
+                                                />
+                                                <input
+                                                    type="text"
+                                                    placeholder="Link (e.g. shilpi/reiki-60)"
+                                                    value={m.link}
+                                                    onChange={(e) => updateMeetingType(m.id, 'link', e.target.value)}
+                                                    style={{ width: '100%', padding: '0.6rem' }}
+                                                />
+                                            </div>
+                                            <button type="button" onClick={() => removeMeetingType(m.id)} style={{ padding: '0.5rem', background: 'rgba(244,67,54,0.1)', border: 'none', color: '#f44336', borderRadius: '8px', cursor: 'pointer' }}>🗑️</button>
+                                        </div>
+                                    ))}
+                                    {meetingTypes.length === 0 && (
+                                        <p style={{ fontSize: '0.85rem', color: 'var(--fg-secondary)', textAlign: 'center', padding: '1rem', fontStyle: 'italic' }}>No variants added. The default link will be used.</p>
+                                    )}
+                                </div>
+                            </div>
+
+                            {settingsStatus.error && <p style={{ color: '#f44336', fontSize: '0.9rem', marginBottom: '1rem' }}>{settingsStatus.error}</p>}
+                            {settingsStatus.success && <p style={{ color: '#4caf50', fontSize: '0.9rem', marginBottom: '1rem' }}>{settingsStatus.success}</p>}
+
+                            <button type="submit" className="btn btn-primary" disabled={settingsStatus.loading} style={{ width: '100%', padding: '1rem' }}>
+                                {settingsStatus.loading ? 'Updating Sanctuary...' : 'Save Divine Settings'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
