@@ -5,8 +5,10 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Ensure we don't spawn excessive processes in restricted environments
   experimental: {
-    workerThreads: false
-  }
+    cpus: 1,
+    workerThreads: false,
+  },
+  staticPageGenerationTimeout: 300,
 };
 
 export default nextConfig;

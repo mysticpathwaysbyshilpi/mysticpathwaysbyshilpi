@@ -27,7 +27,7 @@ async function dbConnect() {
             // Strict resource conservation for Hostinger
             serverSelectionTimeoutMS: 3000,
             socketTimeoutMS: 15000,
-            maxPoolSize: 3,
+            maxPoolSize: 1,
         };
 
         cached!.promise = mongoose.connect(MONGODB_URI!, opts)
