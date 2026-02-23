@@ -203,6 +203,7 @@ export default function AdminDashboard() {
                             archived: result.counts.archived
                         }));
                     }
+                } else {
                     let errData;
                     try {
                         errData = await res.json();
