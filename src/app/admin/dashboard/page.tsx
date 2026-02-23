@@ -84,7 +84,14 @@ export default function AdminDashboard() {
                     newPassword: passwordData.new
                 }),
             });
-            const result = await res.json();
+
+            let result;
+            try {
+                result = await res.json();
+            } catch (jsonErr) {
+                result = { error: 'Server returned an invalid response (500). Please check your MongoDB Environment Variable.' };
+            }
+
             if (res.ok) {
                 setPasswordStatus({ loading: false, error: '', success: 'Sacred password updated successfully!' });
                 setPasswordData({ current: '', new: '', confirm: '' });
@@ -92,8 +99,8 @@ export default function AdminDashboard() {
             } else {
                 setPasswordStatus({ loading: false, error: result.error || 'Failed to update password', success: '' });
             }
-        } catch (err) {
-            setPasswordStatus({ loading: false, error: 'Connection error', success: '' });
+        } catch (err: any) {
+            setPasswordStatus({ loading: false, error: 'Connection failure: ' + (err.message || 'Unknown'), success: '' });
         }
     };
 
@@ -107,15 +114,22 @@ export default function AdminDashboard() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ calComLink, meetingTypes }),
             });
-            const result = await res.json();
+
+            let result;
+            try {
+                result = await res.json();
+            } catch (jsonErr) {
+                result = { error: 'Server returned an invalid response. Please verify MONGODB_URI in Environment Variables.' };
+            }
+
             if (res.ok) {
                 setSettingsStatus({ loading: false, error: '', success: 'Divine settings updated successfully!' });
                 setTimeout(() => setShowSettingsModal(false), 2000);
             } else {
                 setSettingsStatus({ loading: false, error: result.error || 'Failed to update settings', success: '' });
             }
-        } catch (err) {
-            setSettingsStatus({ loading: false, error: 'Connection error', success: '' });
+        } catch (err: any) {
+            setSettingsStatus({ loading: false, error: 'Connection failure: ' + (err.message || 'Unknown'), success: '' });
         }
     };
 
