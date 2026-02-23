@@ -1,8 +1,8 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { useAppContext } from '@/context/AppContext';
+
+export const dynamic = 'force-static';
 
 export default function Contact() {
     const { t } = useAppContext();

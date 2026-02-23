@@ -1,6 +1,6 @@
-'use client';
-
 import { Header } from '@/components/Header';
+
+export const dynamic = 'force-static';
 
 export default function Legal() {
     return (
