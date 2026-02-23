@@ -1,0 +1,81 @@
+{
+  "common": {
+    "bookNow": "Book Now",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "reiki": "Reiki Healing",
+    "tarot": "Tarot Guidance",
+    "numerology": "Numerology",
+    "exploreMore": "Explore More"
+  },
+  "hero": {
+    "title": "Your Path to Spiritual Clarity & Holistic Well-being",
+    "subtitle": "Experience the profound transformation of professional Reiki, Tarot, and Numerology services. Modern guidance for the soul.",
+    "cta": "Start Your Journey"
+  },
+  "services": {
+    "reiki": {
+      "title": "Reiki Healing",
+      "description": "Harmonize your energy and find deep peace through expert Reiki practice.",
+      "areas": [
+        {
+          "name": "Chakra Alignment",
+          "desc": "Balancing the 7 energy centers for emotional and physical harmony."
+        },
+        {
+          "name": "Aura Cleansing",
+          "desc": "Removing energetic debris and stagnant vibes from your personal field."
+        },
+        {
+          "name": "Distance Healing",
+          "desc": "Powerful remote sessions that transcend physical boundaries."
+        }
+      ]
+    },
+    "tarot": {
+      "title": "Tarot Guidance",
+      "description": "Unlock the secrets of your life's path with intuitive and deck-based clarity.",
+      "areas": [
+        {
+          "name": "Relationship Clarity",
+          "desc": "Understanding the deep dynamics of your love life and partnerships."
+        },
+        {
+          "name": "Career & Prosperity",
+          "desc": "Strategic spiritual guidance for your professional and financial growth."
+        },
+        {
+          "name": "Yearly Forecast",
+          "desc": "A month-by-month spiritual roadmap for your upcoming journey."
+        }
+      ]
+    },
+    "numerology": {
+      "title": "Numerology",
+      "description": "Discover the vibrational power of your numbers and align with success.",
+      "areas": [
+        {
+          "name": "Life Path Analysis",
+          "desc": "Decoding your birth numbers to uncover your true destiny."
+        },
+        {
+          "name": "Name Correction",
+          "desc": "Optimizing your name's vibration to attract prosperity and success."
+        },
+        {
+          "name": "Business Numerology",
+          "desc": "Selecting auspicious dates and names for your ventures."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "tagline": "Modern Spiritual Guidance for the Soul",
+    "contact": "Contact Info",
+    "social": "Follow Us",
+    "address": "Our Sanctuary",
+    "copyright": "All rights reserved."
+  }
+}
