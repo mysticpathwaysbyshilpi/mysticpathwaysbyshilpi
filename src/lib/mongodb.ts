@@ -1,10 +1,53 @@
-// Database connection fully disabled for debugging
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
+
+const globalWithMongoose = global as typeof globalThis & {
+    mongoose: { conn: any; promise: any } | undefined;
+};
+
+let cached = globalWithMongoose.mongoose;
+
+if (!cached) {
+    cached = globalWithMongoose.mongoose = { conn: null, promise: null };
+}
 
 async function dbConnect() {
-    console.log('Database connection fully disabled for debugging.');
-    // Return a dummy object to satisfy API consumers
-    return { connection: { label: 'fully-disabled' } };
+    if (cached!.conn) {
+        return cached!.conn;
+    }
+
+    const MONGODB_URI = process.env.MONGODB_URI;
+
+    if (!MONGODB_URI) {
+        throw new Error('MONGODB_URI is not defined. Please check your environment variables.');
+    }
+
+    if (!cached!.promise) {
+        const opts = {
+            bufferCommands: false,
+            // Strict resource conservation for Hostinger
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 15000,
+            maxPoolSize: 1, // Stay extremely lean
+        };
+
+        cached!.promise = mongoose.connect(MONGODB_URI!, opts)
+            .then((mongoose) => {
+                return mongoose;
+            })
+            .catch((err) => {
+                cached!.promise = null; // Reset on failure
+                throw err;
+            });
+    }
+
+    try {
+        cached!.conn = await cached!.promise;
+    } catch (e) {
+        cached!.promise = null; // Ensure retry possible
+        throw e;
+    }
+
+    return cached!.conn;
 }
 
 export default dbConnect;
