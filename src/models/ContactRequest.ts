@@ -40,9 +40,4 @@ const ContactRequestSchema = new mongoose.Schema({
     },
 });
 
-if (mongoose.models.ContactRequest) {
-    delete mongoose.models.ContactRequest;
-}
-
-const ContactRequest = mongoose.model('ContactRequest', ContactRequestSchema);
-export default ContactRequest;
+export default mongoose.models.ContactRequest || mongoose.model('ContactRequest', ContactRequestSchema);

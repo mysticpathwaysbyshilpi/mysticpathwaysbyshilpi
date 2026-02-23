@@ -195,16 +195,19 @@ export default function AdminDashboard() {
                     const result = await res.json();
                     setContacts(result.data);
                     setTotalPages(result.pagination.pages);
-                    setCounts(result.counts);
-                } else if (res.status === 401) {
-                    router.push('/admin/login');
                 } else {
-                    const errData = await res.json();
+                    let errData;
+                    try {
+                        errData = await res.json();
+                    } catch (jsonErr) {
+                        setError(`Server error (${res.status}). Detailed logs may reveal more in Hostinger.`);
+                        return;
+                    }
                     setError(errData.error || 'Divine scrolls could not be fetched.');
                 }
             }
         } catch (err: any) {
-            setError(err.message || 'Connection error.');
+            setError('System error: ' + (err.message || 'Unknown failure'));
         } finally {
             setLoading(false);
         }
