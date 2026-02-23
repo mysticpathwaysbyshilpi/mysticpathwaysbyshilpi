@@ -67,6 +67,7 @@ export const Footer: React.FC = () => {
 
                 <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '2rem', textAlign: 'center', color: 'var(--fg-secondary)', fontSize: '0.8rem' }}>
                     © {new Date().getFullYear()} Mystic Pathways by Shilpi. {t('footer.copyright')}
+                    <div style={{ marginTop: '0.5rem', opacity: 0.5 }}>Celestial Version 2.0.1</div>
                 </div>
             </div>
         </footer>
