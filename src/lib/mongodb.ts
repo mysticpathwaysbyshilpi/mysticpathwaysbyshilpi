@@ -1,33 +1,53 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const globalWithMongoose = global as typeof globalThis & {
+    mongoose: { conn: any; promise: any } | undefined;
+};
 
-if (!MONGODB_URI) {
-    throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
-}
-
-let cached = (global as any).mongoose;
+let cached = globalWithMongoose.mongoose;
 
 if (!cached) {
-    cached = (global as any).mongoose = { conn: null, promise: null };
+    cached = globalWithMongoose.mongoose = { conn: null, promise: null };
 }
 
 async function dbConnect() {
-    if (cached.conn) {
-        return cached.conn;
+    if (cached!.conn) {
+        return cached!.conn;
     }
 
-    if (!cached.promise) {
+    const MONGODB_URI = process.env.MONGODB_URI;
+
+    if (!MONGODB_URI) {
+        throw new Error('MONGODB_URI is not defined. Please check your environment variables.');
+    }
+
+    if (!cached!.promise) {
         const opts = {
             bufferCommands: false,
+            // Production Optimizations for Hostinger
+            serverSelectionTimeoutMS: 5000, // Fail fast if DB unreachable
+            socketTimeoutMS: 30000,         // Prevent long-lived hung sockets
+            maxPoolSize: 5,                // Small pool to conserve server resources
         };
 
-        cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
-            return mongoose;
-        });
+        cached!.promise = mongoose.connect(MONGODB_URI!, opts)
+            .then((mongoose) => {
+                return mongoose;
+            })
+            .catch((err) => {
+                cached!.promise = null; // Reset on failure
+                throw err;
+            });
     }
-    cached.conn = await cached.promise;
-    return cached.conn;
+
+    try {
+        cached!.conn = await cached!.promise;
+    } catch (e) {
+        cached!.promise = null; // Ensure retry possible
+        throw e;
+    }
+
+    return cached!.conn;
 }
 
 export default dbConnect;
