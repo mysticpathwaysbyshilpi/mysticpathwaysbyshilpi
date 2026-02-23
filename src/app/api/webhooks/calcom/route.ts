@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import dbConnect from '@/lib/mongodb';
-import Booking from '@/models/Booking';
+import dbConnect from '../../../../lib/mongodb';
+import Booking from '../../../../models/Booking';
 
 export async function POST(req: Request) {
     try {

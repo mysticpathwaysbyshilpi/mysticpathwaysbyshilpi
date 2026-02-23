@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import dbConnect from '@/lib/mongodb';
-import Admin from '@/models/Admin';
+import dbConnect from '../../../../lib/mongodb';
+import Admin from '../../../../models/Admin';
 
 export async function POST(req: Request) {
     try {

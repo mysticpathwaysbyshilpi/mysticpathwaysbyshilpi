@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import dbConnect from '@/lib/mongodb';
-import Newsletter from '@/models/Newsletter';
+import dbConnect from '../../../../lib/mongodb';
+import Newsletter from '../../../../models/Newsletter';
 
 export async function GET(req: Request) {
     try {

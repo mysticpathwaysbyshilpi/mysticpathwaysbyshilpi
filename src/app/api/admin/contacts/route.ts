@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import dbConnect from '@/lib/mongodb';
-import ContactRequest from '@/models/ContactRequest';
+import dbConnect from '../../../../lib/mongodb';
+import ContactRequest from '../../../../models/ContactRequest';
 
 export async function GET(req: Request) {
     try {
