@@ -16,4 +16,9 @@ const SettingsSchema = new mongoose.Schema({
     },
 }, { timestamps: { updatedAt: true, createdAt: false } });
 
-export default mongoose.models.Settings || mongoose.model('Settings', SettingsSchema);
+if (mongoose.models.Settings) {
+    delete mongoose.models.Settings;
+}
+
+const Settings = mongoose.model('Settings', SettingsSchema);
+export default Settings;

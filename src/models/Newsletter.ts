@@ -13,4 +13,9 @@ const NewsletterSchema = new mongoose.Schema({
     },
 });
 
-export default mongoose.models.Newsletter || mongoose.model('Newsletter', NewsletterSchema);
+if (mongoose.models.Newsletter) {
+    delete mongoose.models.Newsletter;
+}
+
+const Newsletter = mongoose.model('Newsletter', NewsletterSchema);
+export default Newsletter;

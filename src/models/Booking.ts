@@ -41,4 +41,9 @@ const BookingSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-export default mongoose.models.Booking || mongoose.model('Booking', BookingSchema);
+if (mongoose.models.Booking) {
+    delete mongoose.models.Booking;
+}
+
+const Booking = mongoose.model('Booking', BookingSchema);
+export default Booking;
