@@ -13,10 +13,15 @@ export const ServiceSection: React.FC<ServiceSectionProps> = ({ id, reversed }) 
     const service = (t(`services.${id}`) as any);
 
     return (
-        <section style={{ padding: '6rem 0', backgroundColor: reversed ? 'var(--bg-secondary)' : 'var(--bg-primary)' }}>
-            <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+        <section style={{ padding: '6rem 0' }} className={reversed ? 'bg-secondary' : 'bg-primary'}>
+            <div className="container" style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
+                gap: '4rem',
+                alignItems: 'center'
+            }}>
                 <div style={{ order: reversed ? 2 : 1 }} className="reveal">
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>{service.title}</h2>
+                    <h2 style={{ marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>{service.title}</h2>
                     <p style={{ fontSize: '1.1rem', color: 'var(--fg-secondary)', marginBottom: '2.5rem', lineHeight: '1.8' }}>
                         {service.description}
                     </p>
@@ -61,7 +66,7 @@ export const ServiceSection: React.FC<ServiceSectionProps> = ({ id, reversed }) 
                     </div>
 
                     {/* Floating Decorative Sparkles */}
-                    <div style={{ position: 'absolute', top: '-15px', right: '-15px', pointerEvents: 'none' }}>
+                    <div className="desktop-only" style={{ position: 'absolute', top: '-15px', right: '-15px', pointerEvents: 'none' }}>
                         <div style={{ fontSize: '1.5rem', transform: 'rotate(15deg)', animation: 'fadeIn 2s infinite alternate' }}>✨</div>
                         <div style={{ fontSize: '0.8rem', position: 'absolute', top: '20px', left: '-10px', opacity: '0.6', animation: 'fadeIn 3s infinite alternate 1s' }}>✨</div>
                         <div style={{ fontSize: '1rem', position: 'absolute', top: '-5px', left: '25px', opacity: '0.4', animation: 'fadeIn 2.5s infinite alternate 0.5s' }}>✨</div>

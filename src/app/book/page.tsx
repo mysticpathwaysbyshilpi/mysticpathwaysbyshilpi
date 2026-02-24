@@ -50,15 +50,15 @@ export default function Book() {
         <main>
             <Header />
             <div className="container" style={{ padding: '6rem 2rem', textAlign: 'center' }}>
-                <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>Book Your Sanctuary</h1>
+                <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>{t('book.title')}</h1>
 
                 {meetingTypes.length > 0 && !selectedLink ? (
                     <p style={{ fontSize: '1.2rem', color: 'var(--fg-secondary)', marginBottom: '3rem', maxWidth: '700px', margin: '0 auto 3rem' }}>
-                        Please choose the session type that resonates with your current needs to view available times.
+                        {t('book.subtitle1')}
                     </p>
                 ) : (
                     <p style={{ fontSize: '1.2rem', color: 'var(--fg-secondary)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem' }}>
-                        Select a time below that fits your spiritual journey. All sessions are conducted via secure Jitsi Meet or Phone.
+                        {t('book.subtitle2')}
                     </p>
                 )}
 
@@ -80,7 +80,7 @@ export default function Book() {
                 <div className="glass-panel" style={{ padding: '2rem', overflow: 'hidden', minHeight: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                     {loading ? (
                         <div style={{ color: 'var(--accent-primary)', fontSize: '1.2rem', fontWeight: 500 }}>
-                            Connecting to the Divine Calendar...
+                            {t('book.loading')}
                         </div>
                     ) : selectedLink ? (
                         <div style={{ width: '100%', height: '100%' }}>
@@ -89,7 +89,7 @@ export default function Book() {
                                     onClick={() => setSelectedLink(null)}
                                     style={{ background: 'transparent', border: 'none', color: 'var(--accent-primary)', cursor: 'pointer', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', fontWeight: 600 }}
                                 >
-                                    ← Choose a different session
+                                    {t('book.back')}
                                 </button>
                             )}
                             <Cal
@@ -102,9 +102,9 @@ export default function Book() {
                     ) : meetingTypes.length > 0 ? (
                         <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
                             <div style={{ fontSize: '3rem', marginBottom: '1.5rem', animation: 'float 3s ease-in-out infinite' }}>✨</div>
-                            <h3 style={{ color: 'var(--accent-primary)', marginBottom: '1rem', fontSize: '2rem' }}>Awaiting Your Choice</h3>
+                            <h3 style={{ color: 'var(--accent-primary)', marginBottom: '1rem', fontSize: '2rem' }}>{t('book.emptyTitle')}</h3>
                             <p style={{ color: 'var(--fg-secondary)', maxWidth: '400px', margin: '0 auto', fontSize: '1.1rem' }}>
-                                Select one of the session variants above to open the booking sanctuary.
+                                {t('book.emptyText')}
                             </p>
                         </div>
                     ) : defaultLink ? (
@@ -115,7 +115,7 @@ export default function Book() {
                         />
                     ) : (
                         <div style={{ color: '#f44336' }}>
-                            Failed to load the booking sanctuary. Please try again later.
+                            {t('book.error')}
                         </div>
                     )}
                 </div>

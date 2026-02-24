@@ -114,6 +114,18 @@ a {
   padding: 0 2rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
 /* Glassmorphism Classes */
 .glass-panel {
   background: var(--glass-bg);
@@ -213,5 +225,34 @@ a {
 @media (min-width: 769px) {
   .mobile-only {
     display: none !important;
+  }
+}
+
+/* Mobile Typography & Layout Utilities */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  h3 {
+    font-size: 1.75rem !important;
+  }
+
+  .section-padding {
+    padding: 4rem 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.2rem !important;
+  }
+
+  h2 {
+    font-size: 1.8rem !important;
   }
 }

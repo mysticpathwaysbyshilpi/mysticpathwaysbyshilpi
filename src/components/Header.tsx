@@ -7,6 +7,7 @@ import Link from 'next/link';
 export const Header: React.FC = () => {
     const { t, theme, setTheme, language, setLanguage } = useAppContext();
     const [showThemes, setShowThemes] = React.useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
     const themeRef = React.useRef<HTMLDivElement>(null);
 
     const themes = [
@@ -16,7 +17,7 @@ export const Header: React.FC = () => {
         { id: 'mint', name: 'Mint', color: '#6ab098' },
     ];
 
-    // Close theme selector on click outside
+    // Close theme selector and mobile menu on click outside
     React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (themeRef.current && !themeRef.current.contains(event.target as Node)) {
@@ -35,56 +36,64 @@ export const Header: React.FC = () => {
         }
     };
 
+    const navLinks = [
+        { href: '/', label: t('common.home') },
+        { href: '/about', label: t('common.about') },
+        { href: '/services', label: t('common.services') },
+        { href: '/contact', label: t('common.contact') },
+    ];
+
     return (
         <header className="glass-header">
             <div className="container" style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                    <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
+                    <Link href="/" prefetch={false} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', zIndex: 101 }}>
                         <div style={{
                             width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                             boxShadow: 'var(--shadow-soft)', borderRadius: '20px', overflow: 'hidden', backgroundColor: '#fff'
                         }}>
                             <img src="/images/logo.png" alt="Mystic Pathways" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
                         </div>
-                        <span style={{ fontSize: '1.5rem', fontWeight: 'bold', fontFamily: 'var(--font-heading)', color: 'var(--accent-primary)' }}>
+                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', fontFamily: 'var(--font-heading)', color: 'var(--accent-primary)' }}>
                             Mystic Pathways
                         </span>
                     </Link>
-                    <nav style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', fontSize: '0.9rem', fontWeight: '500' }}>
-                        <Link href="/" prefetch={false}>{t('common.home')}</Link>
-                        <Link href="/about" prefetch={false}>{t('common.about')}</Link>
-                        <Link href="/services" prefetch={false}>{t('common.services')}</Link>
-                        <Link href="/contact" prefetch={false}>{t('common.contact')}</Link>
+                    <nav className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', fontSize: '0.9rem', fontWeight: '500' }}>
+                        {navLinks.map(link => (
+                            <Link key={link.href} href={link.href} prefetch={false}>{link.label}</Link>
+                        ))}
                     </nav>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                    {/* Social Icons Placeholder */}
-                    <div style={{ display: 'flex', gap: '1rem', color: 'var(--fg-secondary)', fontSize: '1.1rem' }}>
-                        <a href="https://instagram.com" target="_blank" rel="noreferrer" title="Instagram" style={{ filter: 'grayscale(1)' }}>📸</a>
-                        <a href="https://youtube.com" target="_blank" rel="noreferrer" title="YouTube" style={{ filter: 'grayscale(1)' }}>🎥</a>
-                        <a href="https://facebook.com" target="_blank" rel="noreferrer" title="Facebook" style={{ filter: 'grayscale(1)' }}>👥</a>
-                    </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    {/* Desktop Social & Lang Switcher */}
+                    <div className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                        <div style={{ display: 'flex', gap: '1rem', color: 'var(--fg-secondary)', fontSize: '1.1rem' }}>
+                            <a href="https://instagram.com" target="_blank" rel="noreferrer" title="Instagram" style={{ filter: 'grayscale(1)' }}>📸</a>
+                            <a href="https://youtube.com" target="_blank" rel="noreferrer" title="YouTube" style={{ filter: 'grayscale(1)' }}>🎥</a>
+                            <a href="https://facebook.com" target="_blank" rel="noreferrer" title="Facebook" style={{ filter: 'grayscale(1)' }}>👥</a>
+                        </div>
 
-                    <div style={{ display: 'flex', gap: '0.25rem', border: '1px solid var(--border-light)', padding: '2px', borderRadius: '20px' }}>
-                        <button
-                            onClick={() => setLanguage('en')}
-                            style={{
-                                padding: '4px 10px', borderRadius: '16px', border: 'none', cursor: 'pointer',
-                                backgroundColor: language === 'en' ? 'var(--accent-primary)' : 'transparent',
-                                color: language === 'en' ? '#fff' : 'var(--fg-primary)',
-                                fontSize: '0.75rem', fontWeight: 'bold'
-                            }}
-                        >EN</button>
-                        <button
-                            onClick={() => setLanguage('hi')}
-                            style={{
-                                padding: '4px 10px', borderRadius: '16px', border: 'none', cursor: 'pointer',
-                                backgroundColor: language === 'hi' ? 'var(--accent-primary)' : 'transparent',
-                                color: language === 'hi' ? '#fff' : 'var(--fg-primary)',
-                                fontSize: '0.75rem', fontWeight: 'bold'
-                            }}
-                        >HI</button>
+                        <div style={{ display: 'flex', gap: '0.25rem', border: '1px solid var(--border-light)', padding: '2px', borderRadius: '20px' }}>
+                            <button
+                                onClick={() => setLanguage('en')}
+                                style={{
+                                    padding: '4px 10px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                                    backgroundColor: language === 'en' ? 'var(--accent-primary)' : 'transparent',
+                                    color: language === 'en' ? '#fff' : 'var(--fg-primary)',
+                                    fontSize: '0.75rem', fontWeight: 'bold'
+                                }}
+                            >EN</button>
+                            <button
+                                onClick={() => setLanguage('hi')}
+                                style={{
+                                    padding: '4px 10px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                                    backgroundColor: language === 'hi' ? 'var(--accent-primary)' : 'transparent',
+                                    color: language === 'hi' ? '#fff' : 'var(--fg-primary)',
+                                    fontSize: '0.75rem', fontWeight: 'bold'
+                                }}
+                            >HI</button>
+                        </div>
                     </div>
 
                     {/* Dark Mode Toggle */}
@@ -147,11 +156,82 @@ export const Header: React.FC = () => {
                         )}
                     </div>
 
-                    <Link href="/book" prefetch={false} className="btn btn-primary" style={{ padding: '0.6rem 1.2rem', fontSize: '0.8rem' }}>
+                    <Link href="/book" prefetch={false} className="btn btn-primary desktop-only" style={{ padding: '0.6rem 1.2rem', fontSize: '0.8rem' }}>
                         {t('common.bookNow')}
                     </Link>
+
+                    {/* Mobile Menu Toggle */}
+                    <button
+                        className="mobile-only"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        style={{
+                            background: 'none', border: 'none', cursor: 'pointer',
+                            padding: '0.5rem', zIndex: 101, display: 'flex', alignItems: 'center'
+                        }}
+                    >
+                        <div style={{ width: '24px', height: '18px', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                            <span style={{ width: '100%', height: '2px', backgroundColor: 'var(--fg-primary)', borderRadius: '2px', transition: 'var(--transition-smooth)', transform: mobileMenuOpen ? 'rotate(45deg) translate(5px, 6px)' : 'none' }}></span>
+                            <span style={{ width: '100%', height: '2px', backgroundColor: 'var(--fg-primary)', borderRadius: '2px', transition: 'var(--transition-smooth)', opacity: mobileMenuOpen ? 0 : 1 }}></span>
+                            <span style={{ width: '100%', height: '2px', backgroundColor: 'var(--fg-primary)', borderRadius: '2px', transition: 'var(--transition-smooth)', transform: mobileMenuOpen ? 'rotate(-45deg) translate(5px, -6px)' : 'none' }}></span>
+                        </div>
+                    </button>
                 </div>
             </div>
+
+            {/* Mobile Navigation Overlay */}
+            {mobileMenuOpen && (
+                <div className="glass-panel" style={{
+                    position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh',
+                    zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center',
+                    justifyContent: 'center', gap: '2rem', padding: '2rem'
+                }}>
+                    <nav style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', fontSize: '1.5rem', fontWeight: '600' }}>
+                        {navLinks.map(link => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                prefetch={false}
+                                onClick={() => setMobileMenuOpen(false)}
+                                style={{ color: 'var(--fg-primary)' }}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                        <Link
+                            href="/book"
+                            prefetch={false}
+                            className="btn btn-primary"
+                            style={{ marginTop: '1rem', padding: '1rem 2.5rem' }}
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            {t('common.bookNow')}
+                        </Link>
+                    </nav>
+
+                    <div style={{ display: 'flex', gap: '1.5rem', marginTop: '2rem' }}>
+                        <div style={{ display: 'flex', gap: '0.25rem', border: '1px solid var(--border-light)', padding: '2px', borderRadius: '20px' }}>
+                            <button
+                                onClick={() => setLanguage('en')}
+                                style={{
+                                    padding: '8px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                                    backgroundColor: language === 'en' ? 'var(--accent-primary)' : 'transparent',
+                                    color: language === 'en' ? '#fff' : 'var(--fg-primary)',
+                                    fontSize: '0.875rem', fontWeight: 'bold'
+                                }}
+                            >EN</button>
+                            <button
+                                onClick={() => setLanguage('hi')}
+                                style={{
+                                    padding: '8px 16px', borderRadius: '16px', border: 'none', cursor: 'pointer',
+                                    backgroundColor: language === 'hi' ? 'var(--accent-primary)' : 'transparent',
+                                    color: language === 'hi' ? '#fff' : 'var(--fg-primary)',
+                                    fontSize: '0.875rem', fontWeight: 'bold'
+                                }}
+                            >HI</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </header>
     );
 };

@@ -10,7 +10,7 @@ export const Newsletter: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setStatus({ type: 'loading', message: 'Joining...' });
+        setStatus({ type: 'loading', message: t('newsletter.loading') });
 
         try {
             const res = await fetch('/api/newsletter', {
@@ -21,28 +21,28 @@ export const Newsletter: React.FC = () => {
             const data = await res.json();
 
             if (res.ok) {
-                setStatus({ type: 'success', message: data.message });
+                setStatus({ type: 'success', message: t('newsletter.success') });
                 setEmail('');
             } else {
-                setStatus({ type: 'error', message: data.error });
+                setStatus({ type: 'error', message: data.error || t('newsletter.error') });
             }
         } catch (err) {
-            setStatus({ type: 'error', message: 'Something went wrong.' });
+            setStatus({ type: 'error', message: t('newsletter.error') });
         }
     };
 
     return (
         <section style={{ backgroundColor: 'var(--bg-secondary)', padding: '5rem 0', borderTop: '1px solid var(--border-light)' }}>
             <div className="container" style={{ textAlign: 'center', maxWidth: '600px' }}>
-                <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Newsletter</h2>
+                <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{t('newsletter.title')}</h2>
                 <p style={{ color: 'var(--fg-secondary)', marginBottom: '2rem' }}>
-                    Subscribe for spiritual insights, predictions, and energy healing tips.
+                    {t('newsletter.subtitle')}
                 </p>
                 <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <input
                             type="email"
-                            placeholder="Your Email Address"
+                            placeholder={t('newsletter.placeholder')}
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -52,7 +52,7 @@ export const Newsletter: React.FC = () => {
                                 color: 'var(--fg-primary)', outline: 'none'
                             }}
                         />
-                        <button type="submit" className="btn btn-primary">Subscribe</button>
+                        <button type="submit" className="btn btn-primary">{t('newsletter.button')}</button>
                     </div>
                     {status.message && (
                         <p style={{

@@ -76,6 +76,57 @@
     "contact": "Contact Info",
     "social": "Follow Us",
     "address": "Our Sanctuary",
-    "copyright": "All rights reserved."
+    "addressVal": "Navi Mumbai, Maharashtra, India",
+    "copyright": "All rights reserved.",
+    "usefulLinks": "Useful Links",
+    "privacyLegal": "Privacy & Legal"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "subtitle": "Subscribe for spiritual insights, predictions, and energy healing tips.",
+    "placeholder": "Your Email Address",
+    "button": "Subscribe",
+    "loading": "Joining...",
+    "success": "Subscribed!",
+    "error": "Something went wrong."
+  },
+  "about": {
+    "title": "About Mystic Pathways",
+    "p1": "Welcome to Mystic Pathways, a sacred space dedicated to your spiritual growth and holistic well-being. Founded by Shilpi, we specialize in Reiki healing, Tarot readings, and Numerology consultations.",
+    "p2": "Our mission is to empower individuals to find clarity, balance, and harmony in their lives through these ancient and profound practices. Whether you are seeking physical healing, emotional support, or guidance on your life's path, we are here to support you.",
+    "imageAlt": "Shilpi - Spiritual Guide"
+  },
+  "contact": {
+    "title": "Connect With Us",
+    "subtitle": "Have a question or want to discuss a custom package? Reach out via the form or through our direct channels. We are here to support your journey.",
+    "directReach": "Direct Reach",
+    "sanctuaryTitle": "Our Sanctuary",
+    "address": "Navi Mumbai, Maharashtra, India",
+    "appointmentOnly": "Visits by appointment only.",
+    "form": {
+      "name": "Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "message": "Message",
+      "placeholderEmail": "email@example.com",
+      "placeholderPhone": "10-digit number",
+      "smartDetected": "✨ Smart Detected",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "✨ Message sent successfully!",
+      "errorDefault": "The message could not reach the sanctuary.",
+      "validationError": "Please provide either an email address or a phone number.",
+      "phoneLengthError": "Phone number must be exactly 10 digits."
+    }
+  },
+  "book": {
+    "title": "Book Your Sanctuary",
+    "subtitle1": "Please choose the session type that resonates with your current needs to view available times.",
+    "subtitle2": "Select a time below that fits your spiritual journey. All sessions are conducted via secure Jitsi Meet or Phone.",
+    "loading": "Connecting to the Divine Calendar...",
+    "back": "← Choose a different session",
+    "emptyTitle": "Awaiting Your Choice",
+    "emptyText": "Select one of the session variants above to open the booking sanctuary.",
+    "error": "Failed to load the booking sanctuary. Please try again later."
   }
 }

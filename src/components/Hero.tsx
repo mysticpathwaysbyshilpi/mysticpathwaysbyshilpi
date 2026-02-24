@@ -16,13 +16,16 @@ export const Hero: React.FC = () => {
 
     return (
         <section className="hero-grad" style={{
-            padding: '10rem 0 8rem',
+            padding: '12rem 0 8rem',
             position: 'relative',
             overflow: 'hidden',
             backgroundImage: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/images/hero_background.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            color: '#fff' // Force white text on the dark hero background
+            color: '#fff',
+            minHeight: '80vh',
+            display: 'flex',
+            alignItems: 'center'
         }}>
             {/* Dark Overlay for Readability */}
             <div style={{
@@ -39,17 +42,17 @@ export const Hero: React.FC = () => {
 
             <div className="container flex-center flex-col" style={{ textAlign: 'center', zIndex: 1, position: 'relative' }}>
                 <h1 className="reveal" style={{
-                    fontSize: '4.5rem',
                     lineHeight: '1.2',
                     marginBottom: '2rem',
                     maxWidth: '900px',
                     color: '#ffffff',
-                    textShadow: '0 2px 10px rgba(0,0,0,0.3)'
+                    textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                    fontSize: 'clamp(2.5rem, 8vw, 4.5rem)'
                 }}>
                     {t('hero.title')}
                 </h1>
                 <p className="reveal" style={{
-                    fontSize: '1.25rem',
+                    fontSize: 'clamp(1rem, 4vw, 1.25rem)',
                     color: 'rgba(255, 255, 255, 0.9)',
                     maxWidth: '650px',
                     marginBottom: '3rem',
@@ -59,15 +62,15 @@ export const Hero: React.FC = () => {
                 }}>
                     {t('hero.subtitle')}
                 </p>
-                <div className="reveal flex-center" style={{ gap: '1.5rem', animationDelay: '0.4s' }}>
-                    <Link href="/book" className="btn btn-primary" style={{ padding: '1.2rem 2.5rem' }}>
+                <div className="reveal flex-center" style={{ gap: '1rem', animationDelay: '0.4s', flexWrap: 'wrap' }}>
+                    <Link href="/book" className="btn btn-primary" style={{ padding: '1rem 2rem' }}>
                         {t('hero.cta')}
                     </Link>
                     <button
                         onClick={scrollToServices}
                         className="btn glass-panel"
                         style={{
-                            padding: '1.2rem 2.5rem',
+                            padding: '1rem 2rem',
                             border: '1px solid rgba(255, 255, 255, 0.3)',
                             color: '#ffffff',
                             backgroundColor: 'rgba(255, 255, 255, 0.1)'

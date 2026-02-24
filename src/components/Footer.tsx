@@ -35,11 +35,11 @@ export const Footer: React.FC = () => {
 
                     {/* Quick Links */}
                     <div className="flex-col" style={{ gap: '1rem' }}>
-                        <h4 style={{ fontWeight: '600' }}>Useful Links</h4>
+                        <h4 style={{ fontWeight: '600' }}>{t('footer.usefulLinks')}</h4>
                         <Link href="/about" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.about')}</Link>
                         <Link href="/services" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.services')}</Link>
                         <Link href="/book" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.bookNow')}</Link>
-                        <Link href="/legal" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>Privacy & Legal</Link>
+                        <Link href="/legal" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('footer.privacyLegal')}</Link>
                     </div>
 
                     {/* Contact Info */}
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
                         <h4 style={{ fontWeight: '600' }}>{t('footer.contact')}</h4>
                         <p style={{ color: 'var(--fg-secondary)' }}>📧 shilpi@mysticpathways.com</p>
                         <p style={{ color: 'var(--fg-secondary)' }}>📞 +91 99XXXXXXX</p>
-                        <p style={{ color: 'var(--fg-secondary)' }}>📍 123 Spiritual Lane, Holistic City</p>
+                        <p style={{ color: 'var(--fg-secondary)' }}>📍 {t('footer.addressVal')}</p>
                     </div>
 
                     {/* Map Integration */}

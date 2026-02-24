@@ -55,13 +55,13 @@ export default function Contact() {
         // Validation
         if (!email && !phone) {
             setStatus('validation-error');
-            setErrorMsg('Please provide either an email address or a phone number.');
+            setErrorMsg(t('contact.form.validationError'));
             return;
         }
 
         if (phone && phone.length !== 10) {
             setStatus('validation-error');
-            setErrorMsg('Phone number must be exactly 10 digits.');
+            setErrorMsg(t('contact.form.phoneLengthError'));
             return;
         }
 
@@ -80,7 +80,7 @@ export default function Contact() {
                 (e.target as HTMLFormElement).reset();
             } else {
                 const data = await res.json();
-                setErrorMsg(data.error || 'The message could not reach the sanctuary.');
+                setErrorMsg(data.error || t('contact.form.errorDefault'));
                 setStatus('error');
             }
         } catch (error: any) {
@@ -92,24 +92,28 @@ export default function Contact() {
     return (
         <main>
             <Header />
-            <div className="container" style={{ padding: '8rem 2rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '5rem' }}>
+            <div className="container" style={{ padding: '8rem 1rem' }}>
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
+                    gap: '4rem'
+                }}>
                     <div>
-                        <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>Connect With Us</h1>
+                        <h1 style={{ marginBottom: '1.5rem', color: 'var(--accent-primary)' }}>{t('contact.title')}</h1>
                         <p style={{ color: 'var(--fg-secondary)', marginBottom: '3rem', fontSize: '1.1rem', lineHeight: '1.8' }}>
-                            Have a question or want to discuss a custom package? Reach out via the form or through our direct channels. We are here to support your journey.
+                            {t('contact.subtitle')}
                         </p>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                                <h4 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>Direct Reach</h4>
+                                <h4 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{t('contact.directReach')}</h4>
                                 <p>📧 shilpi@mysticpathways.com</p>
                                 <p>📞 +91 99XXXXXXX</p>
                             </div>
                             <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                                <h4 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>Our Sanctuary</h4>
-                                <p>📍 Navi Mumbai, Maharashtra, India</p>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--fg-secondary)', marginTop: '0.5rem' }}>Visits by appointment only.</p>
+                                <h4 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{t('contact.sanctuaryTitle')}</h4>
+                                <p>📍 {t('contact.address')}</p>
+                                <p style={{ fontSize: '0.9rem', color: 'var(--fg-secondary)', marginTop: '0.5rem' }}>{t('contact.appointmentOnly')}</p>
 
                                 <div style={{ marginTop: '1.5rem', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-light)', height: '300px' }}>
                                     <iframe
@@ -127,21 +131,26 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="glass-panel" style={{ padding: '3rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <form onSubmit={handleSubmit} className="glass-panel" style={{
+                        padding: 'clamp(1.5rem, 5vw, 3rem)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1.5rem'
+                    }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <label style={{ fontWeight: 500 }}>Name</label>
+                            <label style={{ fontWeight: 500 }}>{t('contact.form.name')}</label>
                             <input name="name" type="text" required style={{ padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-light)', backgroundColor: 'var(--bg-primary)', color: 'var(--fg-primary)', outline: 'none' }} />
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <label style={{ fontWeight: 500 }}>Email Address</label>
-                            <input name="email" type="email" placeholder="email@example.com" style={{ padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-light)', backgroundColor: 'var(--bg-primary)', color: 'var(--fg-primary)', outline: 'none' }} />
+                            <label style={{ fontWeight: 500 }}>{t('contact.form.email')}</label>
+                            <input name="email" type="email" placeholder={t('contact.form.placeholderEmail')} style={{ padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-light)', backgroundColor: 'var(--bg-primary)', color: 'var(--fg-primary)', outline: 'none' }} />
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <label style={{ fontWeight: 500 }}>Phone Number</label>
-                                <span style={{ fontSize: '0.7rem', color: '#4caf50', backgroundColor: 'rgba(76, 175, 80, 0.1)', padding: '0.2rem 0.6rem', borderRadius: '20px', fontWeight: 600 }}>✨ Smart Detected</span>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                <label style={{ fontWeight: 500 }}>{t('contact.form.phone')}</label>
+                                <span style={{ fontSize: '0.7rem', color: '#4caf50', backgroundColor: 'rgba(76, 175, 80, 0.1)', padding: '0.2rem 0.6rem', borderRadius: '20px', fontWeight: 600 }}>{t('contact.form.smartDetected')}</span>
                             </div>
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
                                 <input type="hidden" name="countryCode" value={selectedCountryCode} />
@@ -155,7 +164,7 @@ export default function Contact() {
                                 <input
                                     name="phone"
                                     type="tel"
-                                    placeholder="10-digit number"
+                                    placeholder={t('contact.form.placeholderPhone')}
                                     maxLength={10}
                                     onInput={(e) => {
                                         const target = e.target as HTMLInputElement;
@@ -167,15 +176,15 @@ export default function Contact() {
                         </div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <label style={{ fontWeight: 500 }}>Message</label>
+                            <label style={{ fontWeight: 500 }}>{t('contact.form.message')}</label>
                             <textarea name="message" rows={5} required style={{ padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-light)', backgroundColor: 'var(--bg-primary)', color: 'var(--fg-primary)', outline: 'none', resize: 'vertical' }}></textarea>
                         </div>
 
                         <button type="submit" disabled={status === 'loading'} className="btn btn-primary">
-                            {status === 'loading' ? 'Sending...' : 'Send Message'}
+                            {status === 'loading' ? t('contact.form.sending') : t('contact.form.send')}
                         </button>
 
-                        {status === 'success' && <p style={{ color: '#4caf50', textAlign: 'center', fontWeight: 500 }}>✨ Message sent successfully!</p>}
+                        {status === 'success' && <p style={{ color: '#4caf50', textAlign: 'center', fontWeight: 500 }}>{t('contact.form.success')}</p>}
                         {status === 'error' && <p style={{ color: '#f44336', textAlign: 'center', fontWeight: 500 }}>❌ {errorMsg}</p>}
                         {status === 'validation-error' && <p style={{ color: '#ff9800', textAlign: 'center', fontWeight: 500 }}>⚠️ {errorMsg}</p>}
                     </form>
