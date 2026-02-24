@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="pink">
       <body>
         <AppProvider>
           <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
