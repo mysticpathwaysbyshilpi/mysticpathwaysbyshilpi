@@ -3,7 +3,7 @@
 import React from 'react';
 
 export const WhatsAppButton: React.FC = () => {
-    const phoneNumber = '+910000000000'; // Placeholder
+    const phoneNumber = '+919152559833'; // Placeholder
     const message = 'Hello! I would like to inquire about your services.';
 
     return (
