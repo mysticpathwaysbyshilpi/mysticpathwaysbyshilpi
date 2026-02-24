@@ -79,7 +79,7 @@ export const ServiceSection: React.FC<ServiceSectionProps> = ({ id, reversed }) 
                         borderRadius: '20px', boxShadow: 'var(--shadow-soft)', display: 'flex',
                         alignItems: 'center', justifyContent: 'center', zIndex: 5, overflow: 'hidden'
                     }}>
-                        <img src="/images/logo.png" alt="Icon" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
+                        <img src="/images/logo.png?v=2.01" alt="Icon" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
                     </div>
                 </div>
             </div>

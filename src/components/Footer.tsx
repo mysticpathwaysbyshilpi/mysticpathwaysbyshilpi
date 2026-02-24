@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
                                 width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 boxShadow: 'var(--shadow-soft)', borderRadius: '20px', overflow: 'hidden', backgroundColor: '#fff'
                             }}>
-                                <img src="/images/logo.png" alt="Logo" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
+                                <img src="/images/logo.png?v=2.01" alt="Logo" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
                             </div>
                             <h3 style={{ color: 'var(--accent-primary)', fontSize: '1.5rem', margin: 0 }}>Mystic Pathways</h3>
                         </div>

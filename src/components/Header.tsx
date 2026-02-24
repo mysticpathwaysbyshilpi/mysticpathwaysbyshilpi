@@ -62,7 +62,7 @@ export const Header: React.FC = () => {
                             width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center',
                             boxShadow: 'var(--shadow-soft)', borderRadius: '20px', overflow: 'hidden', backgroundColor: '#fff'
                         }}>
-                            <img src="/images/logo.png" alt="Mystic Pathways" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
+                            <img src="/images/logo.png?v=2.01" alt="Mystic Pathways" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
                         </div>
                         <span style={{ fontSize: '1.25rem', fontWeight: 'bold', fontFamily: 'var(--font-heading)', color: 'var(--accent-primary)' }}>
                             Mystic Pathways
