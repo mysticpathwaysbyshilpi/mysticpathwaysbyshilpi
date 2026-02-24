@@ -17,56 +17,395 @@
   },
   "services": {
     "reiki": {
-      "title": "Reiki Healing",
-      "description": "Harmonize your energy and find deep peace through expert Reiki practice.",
+      "title": "Reiki Healing Services",
+      "description": "Restore your body's natural energy flow and find deep relaxation with professional Reiki sessions. Our comprehensive healing services range from personalized one-on-one sessions and chakra balancing to specialized healing for pets and practitioner attunements.",
       "areas": [
         {
-          "name": "Chakra Alignment",
-          "desc": "Balancing the 7 energy centers for emotional and physical harmony."
+          "name": "Personalized Healing",
+          "desc": "Individual and distance sessions designed to balance energy and restore inner harmony."
         },
         {
-          "name": "Aura Cleansing",
-          "desc": "Removing energetic debris and stagnant vibes from your personal field."
+          "name": "Energy & Chakra Balancing",
+          "desc": "Alignment of the 7 main chakras and aura cleansing to remove emotional and physical blockages."
         },
         {
-          "name": "Distance Healing",
-          "desc": "Powerful remote sessions that transcend physical boundaries."
+          "name": "Emotional Wellness",
+          "desc": "Targeted healing for stress, anxiety, and manifestation to align your vibration with your life goals."
         }
       ]
     },
     "tarot": {
-      "title": "Tarot Guidance",
-      "description": "Unlock the secrets of your life's path with intuitive and deck-based clarity.",
+      "title": "Tarot Card Reading",
+      "description": "Gain profound insights and spiritual guidance for your life's most pressing questions. Whether seeking clarity in relationships, career direction, or an overview of your past, present, and future, our intuitive deck-based readings provide the path forward.",
       "areas": [
         {
-          "name": "Relationship Clarity",
-          "desc": "Understanding the deep dynamics of your love life and partnerships."
+          "name": "Life & Love Guidance",
+          "desc": "Deep intuitive sessions focused on personal situations, relationships, and emotional compatibility."
         },
         {
-          "name": "Career & Prosperity",
-          "desc": "Strategic spiritual guidance for your professional and financial growth."
+          "name": "Career & Success",
+          "desc": "Strategic spiritual guidance regarding professional growth, job opportunities, and business decisions."
         },
         {
-          "name": "Yearly Forecast",
-          "desc": "A month-by-month spiritual roadmap for your upcoming journey."
+          "name": "Insightful Roadmaps",
+          "desc": "Comprehensive Past-Present-Future spreads and quick Yes/No readings for immediate clarity."
         }
       ]
     },
     "numerology": {
-      "title": "Numerology",
-      "description": "Discover the vibrational power of your numbers and align with success.",
+      "title": "Numerology Consultation",
+      "description": "Unlock the vibrational secrets hidden within your numbers to align with your true destiny. From complete life path analysis and name correction to choosing auspicious names for babies and businesses, discover how numbers shape your success.",
       "areas": [
         {
-          "name": "Life Path Analysis",
-          "desc": "Decoding your birth numbers to uncover your true destiny."
+          "name": "Destiny Analysis",
+          "desc": "Complete analysis of birth dates and names to uncover life purpose, strengths, and challenges."
         },
         {
-          "name": "Name Correction",
-          "desc": "Optimizing your name's vibration to attract prosperity and success."
+          "name": "Vibrational Correction",
+          "desc": "Name and brand alignment (Chaldean Method) to harmonize with lucky and successful frequencies."
         },
         {
-          "name": "Business Numerology",
-          "desc": "Selecting auspicious dates and names for your ventures."
+          "name": "Daily Guidance",
+          "desc": "Personal luck recommendations for dates, colors, and analysis of mobile or vehicle numbers."
+        }
+      ]
+    }
+  },
+  "services_detail": {
+    "reiki": {
+      "title": "REIKI HEALING SERVICES ✨",
+      "subtitle": "Holistic Mind • Body • Spirit Healing",
+      "sections": [
+        {
+          "title": "🌿 Personalized Healing Sessions",
+          "items": [
+            {
+              "name": "One-on-One Reiki Session",
+              "image": "/images/One2OneReiki.jpg",
+              "desc": "A personalized healing experience designed to balance your energy and restore inner harmony.",
+              "bullets": [
+                "Deep relaxation",
+                "Emotional release",
+                "Energy alignment",
+                "Physical & mental well-being"
+              ]
+            },
+            {
+              "name": "Distance Healing Session",
+              "image": "/images/distaneReiki.jpg",
+              "desc": "Receive powerful Reiki healing from the comfort of your home.",
+              "bullets": [
+                "Works beyond physical boundaries",
+                "Emotional & physical healing",
+                "Convenient & effective"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "🌈 Energy Balancing Services",
+          "items": [
+            {
+              "name": "Chakra Balancing",
+              "image": "/images/ChakraBalancing.jpg",
+              "desc": "Alignment of the 7 main chakras to restore smooth energy flow.",
+              "bullets": [
+                "Removes blockages",
+                "Improves confidence & clarity",
+                "Emotional stability"
+              ]
+            },
+            {
+              "name": "Aura Cleansing",
+              "image": "/images/AuraCleansing.jpg",
+              "desc": "Removal of negative and stagnant energies from your aura.",
+              "bullets": [
+                "Protection from negativity",
+                "Emotional detox",
+                "Lightness & positivity"
+              ]
+            },
+            {
+              "name": "Aura Scanning",
+              "image": "/images/AuraScanning.jpg",
+              "desc": "Detailed energy assessment to identify blocked chakras and root causes.",
+              "bullets": [
+                "Blocked chakras",
+                "Energy leaks",
+                "Emotional patterns",
+                "Root causes"
+              ]
+            },
+            {
+              "name": "Full Body Energy Healing",
+              "image": "/images/FullBodyEnergyHealing.jpg",
+              "desc": "Complete energetic reset for overall well-being.",
+              "bullets": [
+                "Boosts vitality",
+                "Clears energetic congestion",
+                "Strengthens inner power"
+              ]
+            },
+            {
+              "name": "Local Area Healing",
+              "image": "/images/LocalAreaHealing.jpg",
+              "desc": "Targeted healing for specific body areas like back pain or headaches.",
+              "bullets": [
+                "Back pain",
+                "Headache",
+                "Stomach discomfort",
+                "Physical tension"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "🌸 Emotional & Mental Healing",
+          "items": [
+            {
+              "name": "Healing for Stress, Anxiety & Depression",
+              "image": "/images/HealingforStress.jpg",
+              "desc": "Calming the nervous system through Reiki energy.",
+              "bullets": [
+                "Reduces overthinking",
+                "Improves sleep",
+                "Emotional grounding",
+                "Inner peace"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "💰 Abundance & Life Alignment Healing",
+          "items": [
+            {
+              "name": "Financial Abundance Healing",
+              "image": "/images/FinancialAbundanceHealing.jpg",
+              "desc": "Clearing money blockages and scarcity mindset.",
+              "bullets": [
+                "Attract prosperity",
+                "Boost confidence",
+                "Remove subconscious fears"
+              ]
+            },
+            {
+              "name": "Relationship Healing",
+              "image": "/images/RelationshipHealing.jpg",
+              "desc": "Healing emotional wounds and strengthening bonds.",
+              "bullets": [
+                "Improve communication",
+                "Release past hurt",
+                "Restore harmony"
+              ]
+            },
+            {
+              "name": "Career Growth Healing",
+              "image": "/images/CareerGrowthHealing.jpg",
+              "desc": "Energy alignment for professional success.",
+              "bullets": [
+                "Confidence enhancement",
+                "Decision clarity",
+                "Opportunity attraction"
+              ]
+            },
+            {
+              "name": "Manifestation Healing",
+              "image": "/images/ManifestationHealing.jpg",
+              "desc": "Aligning your vibration with your desires.",
+              "bullets": [
+                "Clear limiting beliefs",
+                "Raise energy frequency",
+                "Goal alignment"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "🐾 Special Healing Services",
+          "items": [
+            {
+              "name": "Healing for Pets",
+              "image": "/images/HealingforPets.jpg",
+              "desc": "Gentle Reiki healing for animals to reduce anxiety and support recovery.",
+              "bullets": [
+                "Reduces anxiety",
+                "Emotional comfort",
+                "Recovery support"
+              ]
+            },
+            {
+              "name": "Reiki Attunements",
+              "image": "/images/ReikiAttunements.jpg",
+              "desc": "Become a certified Reiki practitioner (Level 1, 2, or Master).",
+              "bullets": [
+                "Level 1",
+                "Level 2",
+                "Master Level",
+                "Energy channel activation & guidance"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "tarot": {
+      "title": "🔮 TAROT CARD READING SERVICES 🔮",
+      "subtitle": "Guidance • Clarity • Insight • Empowerment",
+      "sections": [
+        {
+          "title": "🌟 Core Readings",
+          "items": [
+            {
+              "name": "One-on-One Tarot Reading",
+              "image": "/images/One_on_OneTarotReading.jpg",
+              "desc": "A personalized session focused completely on your questions and life situation.",
+              "bullets": [
+                "Detailed card interpretation",
+                "Honest and intuitive guidance",
+                "Practical solutions",
+                "Clarity on next steps"
+              ]
+            },
+            {
+              "name": "Love & Relationship Reading",
+              "image": "/images/LoveRelationshipReading.jpg",
+              "desc": "Understand your partner’s intentions and relationship future.",
+              "bullets": [
+                "Feelings & loyalty check",
+                "Marriage possibilities",
+                "Breakup or reconciliation guidance",
+                "Emotional compatibility"
+              ]
+            },
+            {
+              "name": "Career & Job Reading",
+              "image": "/images/CareerJobReading.jpg",
+              "desc": "Guidance regarding career growth and opportunities.",
+              "bullets": [
+                "Job change or promotion",
+                "Business growth",
+                "Workplace challenges",
+                "Right career path"
+              ]
+            },
+            {
+              "name": "Yes / No Tarot Reading",
+              "image": "/images/YesNoTarotReading.jpg",
+              "desc": "Quick guidance for specific questions requiring immediate clarity.",
+              "bullets": [
+                "Clear answer (Yes / No / Maybe)",
+                "Short explanation",
+                "Immediate clarity"
+              ]
+            },
+            {
+              "name": "Past – Present – Future Reading",
+              "image": "/images/PastPresentFutureReading.jpg",
+              "desc": "A 3-card spread to understand life direction and overall overview.",
+              "bullets": [
+                "Past influence",
+                "Current situation",
+                "Future outcome"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "numerology": {
+      "title": "🔢 NUMEROLOGY CONSULTATION SERVICES 🔢",
+      "subtitle": "Decode Your Numbers • Discover Your Destiny",
+      "sections": [
+        {
+          "title": "✨ Analysis & Correction",
+          "items": [
+            {
+              "name": "Complete Numerology Consultation",
+              "image": "/images/CompleteNumerologyConsultation.jpg",
+              "desc": "A detailed analysis based on your Date of Birth & Full Name.",
+              "bullets": [
+                "Life Path Number",
+                "Destiny / Expression Number",
+                "Personality Number",
+                "Strengths & Challenges"
+              ]
+            },
+            {
+              "name": "Name Numerology Correction",
+              "image": "/images/NameNumerologyCorrection.jpg",
+              "desc": "Aligning your name spelling (Chaldean Method) with lucky vibrations.",
+              "bullets": [
+                "Personal name spelling changes",
+                "Business name correction",
+                "Brand name alignment",
+                "Baby name suggestions"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "📂 Career & Life Guidance",
+          "items": [
+            {
+              "name": "Personal Year & Monthly Prediction",
+              "image": "/images/PersonalYearMonthlyPrediction.jpg",
+              "desc": "Know what the current year holds and plan your decisions wisely.",
+              "bullets": [
+                "Personal Year Number analysis",
+                "Monthly energy forecast",
+                "Best time for decisions",
+                "Caution periods"
+              ]
+            },
+            {
+              "name": "Career & Business Numerology",
+              "image": "/images/CareerBusinessNumerology.jpg",
+              "desc": "Numerology guidance for professional success and compatibility.",
+              "bullets": [
+                "Suitable career path",
+                "Business name compatibility",
+                "Partnership compatibility",
+                "Growth periods"
+              ]
+            },
+            {
+              "name": "Baby Name & Birth Guidance",
+              "image": "/images/BabyNameBirthGuidance.jpg",
+              "desc": "Choose a lucky and supportive name for your child's journey.",
+              "bullets": [
+                "Favourable alphabets",
+                "Destiny alignment",
+                "Strong number combinations",
+                "Future growth support"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "🗓️ Everyday Luck",
+          "items": [
+            {
+              "name": "Lucky Numbers, Colors & Dates",
+              "image": "/images/LuckyNumbersColorsDates.jpg",
+              "desc": "Personalized recommendations to improve daily success.",
+              "bullets": [
+                "Lucky numbers",
+                "Lucky colors",
+                "Favourable dates",
+                "Important day selection"
+              ]
+            },
+            {
+              "name": "Mobile & Vehicle Number Analysis",
+              "image": "/images/MobileVehicleNumberAnalysis.jpg",
+              "desc": "Energy analysis of frequently used numbers for vibrational alignment.",
+              "bullets": [
+                "Mobile number compatibility",
+                "Vehicle number selection",
+                "Business contact number guidance"
+              ]
+            }
+          ]
         }
       ]
     }
@@ -76,7 +415,7 @@
     "contact": "Contact Info",
     "social": "Follow Us",
     "address": "Our Sanctuary",
-    "addressVal": "Navi Mumbai, Maharashtra, India",
+    "addressVal": "B 303, Rosewood Heights, Sector-10, Kharghar, Navi Mumbai, Maharashtra, 410210",
     "copyright": "All rights reserved.",
     "usefulLinks": "Useful Links",
     "privacyLegal": "Privacy & Legal"
@@ -101,7 +440,7 @@
     "subtitle": "Have a question or want to discuss a custom package? Reach out via the form or through our direct channels. We are here to support your journey.",
     "directReach": "Direct Reach",
     "sanctuaryTitle": "Our Sanctuary",
-    "address": "Navi Mumbai, Maharashtra, India",
+    "address": "B 303, Rosewood Heights, Sector-10, Kharghar, Navi Mumbai, Maharashtra, 410210",
     "appointmentOnly": "Visits by appointment only.",
     "form": {
       "name": "Name",

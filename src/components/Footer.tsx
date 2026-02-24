@@ -26,10 +26,9 @@ export const Footer: React.FC = () => {
                             {t('footer.tagline')}
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', fontSize: '1.5rem' }}>
-                            <a href="#" style={{ filter: 'grayscale(1)' }}>📸</a>
-                            <a href="#" style={{ filter: 'grayscale(1)' }}>🎥</a>
-                            <a href="#" style={{ filter: 'grayscale(1)' }}>👥</a>
-                            <a href="#" style={{ filter: 'grayscale(1)' }}>𝕏</a>
+                            <a href="https://instagram.com/mystic_pathways_by_shilpi" target="_blank" rel="noreferrer" title="Instagram" style={{ filter: 'grayscale(1)' }}>📸</a>
+                            <a href="https://youtube.com/@shilpiaggrawal" target="_blank" rel="noreferrer" title="YouTube" style={{ filter: 'grayscale(1)' }}>🎥</a>
+                            <a href="https://facebook.com/mysticpathwaysbyshilpi" target="_blank" rel="noreferrer" title="Facebook" style={{ filter: 'grayscale(1)' }}>👥</a>
                         </div>
                     </div>
 
@@ -37,7 +36,9 @@ export const Footer: React.FC = () => {
                     <div className="flex-col" style={{ gap: '1rem' }}>
                         <h4 style={{ fontWeight: '600' }}>{t('footer.usefulLinks')}</h4>
                         <Link href="/about" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.about')}</Link>
-                        <Link href="/services" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.services')}</Link>
+                        <Link href="/services/reiki" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.reiki')}</Link>
+                        <Link href="/services/tarot" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.tarot')}</Link>
+                        <Link href="/services/numerology" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.numerology')}</Link>
                         <Link href="/book" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('common.bookNow')}</Link>
                         <Link href="/legal" prefetch={false} style={{ color: 'var(--fg-secondary)' }}>{t('footer.privacyLegal')}</Link>
                     </div>
@@ -45,22 +46,22 @@ export const Footer: React.FC = () => {
                     {/* Contact Info */}
                     <div className="flex-col" style={{ gap: '1rem' }}>
                         <h4 style={{ fontWeight: '600' }}>{t('footer.contact')}</h4>
-                        <p style={{ color: 'var(--fg-secondary)' }}>📧 shilpi@mysticpathways.com</p>
-                        <p style={{ color: 'var(--fg-secondary)' }}>📞 +91 99XXXXXXX</p>
+                        <p style={{ color: 'var(--fg-secondary)' }}>📧 help@healingwithshilpi.com</p>
+                        <p style={{ color: 'var(--fg-secondary)' }}>📞 +91 9152559833</p>
                         <p style={{ color: 'var(--fg-secondary)' }}>📍 {t('footer.addressVal')}</p>
                     </div>
 
                     {/* Map Integration */}
                     <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--border-light)', height: '220px', position: 'relative' }}>
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120682.04940026214!2d72.9364966779435!3d19.03680710609657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c3dad03e7335%3A0x671f11da52e3e580!2sNavi%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                            src="https://maps.google.com/maps?q=Mystic+Pathways+by+Shilpi@19.03374206996705,73.07700368644616&z=12&output=embed"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
                             allowFullScreen={true}
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            title="Navi Mumbai Location"
+                            title="Healing With Shilpi"
                         ></iframe>
                     </div>
                 </div>

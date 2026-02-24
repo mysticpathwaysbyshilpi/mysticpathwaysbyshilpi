@@ -7,8 +7,10 @@ import Link from 'next/link';
 export const Header: React.FC = () => {
     const { t, theme, setTheme, language, setLanguage } = useAppContext();
     const [showThemes, setShowThemes] = React.useState(false);
+    const [servicesDropdown, setServicesDropdown] = React.useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
     const themeRef = React.useRef<HTMLDivElement>(null);
+    const servicesRef = React.useRef<HTMLDivElement>(null);
 
     const themes = [
         { id: 'pink', name: 'Pink', color: '#d489ad' },
@@ -17,11 +19,20 @@ export const Header: React.FC = () => {
         { id: 'mint', name: 'Mint', color: '#6ab098' },
     ];
 
-    // Close theme selector and mobile menu on click outside
+    const navLinks = [
+        { href: '/', label: t('common.home') },
+        { href: '/about', label: t('common.about') },
+        { href: '/contact', label: t('common.contact') },
+    ];
+
+    // Close dropdowns on click outside
     React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (themeRef.current && !themeRef.current.contains(event.target as Node)) {
                 setShowThemes(false);
+            }
+            if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
+                setServicesDropdown(false);
             }
         };
         document.addEventListener('mousedown', handleClickOutside);
@@ -30,17 +41,16 @@ export const Header: React.FC = () => {
 
     const toggleDarkMode = () => {
         if (theme === 'dark') {
-            setTheme('pink'); // Default back to pink if current is dark
+            setTheme('pink');
         } else {
             setTheme('dark');
         }
     };
 
-    const navLinks = [
-        { href: '/', label: t('common.home') },
-        { href: '/about', label: t('common.about') },
-        { href: '/services', label: t('common.services') },
-        { href: '/contact', label: t('common.contact') },
+    const serviceItems = [
+        { href: '/services/reiki', label: t('common.reiki') },
+        { href: '/services/tarot', label: t('common.tarot') },
+        { href: '/services/numerology', label: t('common.numerology') },
     ];
 
     return (
@@ -59,9 +69,54 @@ export const Header: React.FC = () => {
                         </span>
                     </Link>
                     <nav className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', fontSize: '0.9rem', fontWeight: '500' }}>
-                        {navLinks.map(link => (
-                            <Link key={link.href} href={link.href} prefetch={false}>{link.label}</Link>
-                        ))}
+                        <Link href="/" prefetch={false}>{t('common.home')}</Link>
+                        <Link href="/about" prefetch={false}>{t('common.about')}</Link>
+
+                        {/* Services Dropdown */}
+                        <div
+                            ref={servicesRef}
+                            style={{ position: 'relative' }}
+                            onMouseEnter={() => setServicesDropdown(true)}
+                            onMouseLeave={() => setServicesDropdown(false)}
+                        >
+                            <Link
+                                href="#"
+                                prefetch={false}
+                                style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+                            >
+                                {t('common.services')}
+                                <span style={{ fontSize: '0.6rem', transition: 'transform 0.3s ease', transform: servicesDropdown ? 'rotate(180deg)' : 'none' }}>▼</span>
+                            </Link>
+
+                            {servicesDropdown && (
+                                <div className="glass-panel" style={{
+                                    position: 'absolute', top: '100%', left: '0', padding: '0.75rem',
+                                    display: 'flex', flexDirection: 'column', gap: '0.25rem', zIndex: 200,
+                                    minWidth: '200px', transformOrigin: 'top center',
+                                    animation: 'fadeIn 0.2s ease forwards'
+                                }}>
+                                    {serviceItems.map(item => (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            prefetch={false}
+                                            style={{
+                                                padding: '0.6rem 1rem',
+                                                borderRadius: '8px',
+                                                transition: 'var(--transition-smooth)',
+                                                color: 'var(--fg-primary)'
+                                            }}
+                                            className="nav-dropdown-link"
+                                            onClick={() => setServicesDropdown(false)}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        <Link href="/contact" prefetch={false}>{t('common.contact')}</Link>
                     </nav>
                 </div>
 
@@ -69,9 +124,9 @@ export const Header: React.FC = () => {
                     {/* Desktop Social & Lang Switcher */}
                     <div className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
                         <div style={{ display: 'flex', gap: '1rem', color: 'var(--fg-secondary)', fontSize: '1.1rem' }}>
-                            <a href="https://instagram.com" target="_blank" rel="noreferrer" title="Instagram" style={{ filter: 'grayscale(1)' }}>📸</a>
-                            <a href="https://youtube.com" target="_blank" rel="noreferrer" title="YouTube" style={{ filter: 'grayscale(1)' }}>🎥</a>
-                            <a href="https://facebook.com" target="_blank" rel="noreferrer" title="Facebook" style={{ filter: 'grayscale(1)' }}>👥</a>
+                            <a href="https://instagram.com/mystic_pathways_by_shilpi" target="_blank" rel="noreferrer" title="Instagram" style={{ filter: 'grayscale(1)' }}>📸</a>
+                            <a href="https://youtube.com/@shilpiaggrawal" target="_blank" rel="noreferrer" title="YouTube" style={{ filter: 'grayscale(1)' }}>🎥</a>
+                            <a href="https://facebook.com/mysticpathwaysbyshilpi" target="_blank" rel="noreferrer" title="Facebook" style={{ filter: 'grayscale(1)' }}>👥</a>
                         </div>
 
                         <div style={{ display: 'flex', gap: '0.25rem', border: '1px solid var(--border-light)', padding: '2px', borderRadius: '20px' }}>
@@ -183,20 +238,29 @@ export const Header: React.FC = () => {
                 <div className="glass-panel" style={{
                     position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh',
                     zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center',
-                    justifyContent: 'center', gap: '2rem', padding: '2rem'
+                    justifyContent: 'center', gap: '2rem', padding: '2rem', overflowY: 'auto'
                 }}>
-                    <nav style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', fontSize: '1.5rem', fontWeight: '600' }}>
-                        {navLinks.map(link => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                prefetch={false}
-                                onClick={() => setMobileMenuOpen(false)}
-                                style={{ color: 'var(--fg-primary)' }}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                    <nav style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', fontSize: '1.25rem', fontWeight: '600', width: '100%' }}>
+                        <Link href="/" prefetch={false} onClick={() => setMobileMenuOpen(false)}>{t('common.home')}</Link>
+                        <Link href="/about" prefetch={false} onClick={() => setMobileMenuOpen(false)}>{t('common.about')}</Link>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', width: '100%' }}>
+                            <span style={{ color: 'var(--accent-primary)', fontSize: '1.1rem' }}>{t('common.services')}</span>
+                            {serviceItems.map(item => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    prefetch={false}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    style={{ fontSize: '1rem', opacity: 0.8 }}
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
+                        </div>
+
+                        <Link href="/contact" prefetch={false} onClick={() => setMobileMenuOpen(false)}>{t('common.contact')}</Link>
+
                         <Link
                             href="/book"
                             prefetch={false}
