@@ -107,7 +107,7 @@ export default function Contact() {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div className="glass-panel" style={{ padding: '1.5rem' }}>
                                 <h4 style={{ color: 'var(--accent-primary)', marginBottom: '0.5rem' }}>{t('contact.directReach')}</h4>
-                                <p>📧 help@healingwithshilpi.com</p>
+                                <p>📧 help@healingsbyshilpi.com</p>
                                 <p>📞 +91 9152559833</p>
                             </div>
                             <div className="glass-panel" style={{ padding: '1.5rem' }}>
@@ -124,7 +124,7 @@ export default function Contact() {
                                         allowFullScreen={true}
                                         loading="lazy"
                                         referrerPolicy="no-referrer-when-downgrade"
-                                        title="Healing With Shilpi"
+                                        title="Healings By Shilpi"
                                     ></iframe>
                                 </div>
                             </div>

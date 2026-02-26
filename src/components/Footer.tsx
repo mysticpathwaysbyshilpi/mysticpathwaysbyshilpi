@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
                             }}>
                                 <img src="/images/logo.png?v=2.01" alt="Logo" style={{ width: '90%', height: '90%', objectFit: 'contain' }} />
                             </div>
-                            <h3 style={{ color: 'var(--accent-primary)', fontSize: '1.5rem', margin: 0 }}>Mystic Pathways</h3>
+                            <h3 style={{ color: 'var(--accent-primary)', fontSize: '1.5rem', margin: 0 }}>Healings By Shilpi</h3>
                         </div>
                         <p style={{ color: 'var(--fg-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
                             {t('footer.tagline')}
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
                     {/* Contact Info */}
                     <div className="flex-col" style={{ gap: '1rem' }}>
                         <h4 style={{ fontWeight: '600' }}>{t('footer.contact')}</h4>
-                        <p style={{ color: 'var(--fg-secondary)' }}>📧 help@healingwithshilpi.com</p>
+                        <p style={{ color: 'var(--fg-secondary)' }}>📧 help@healingsbyshilpi.com</p>
                         <p style={{ color: 'var(--fg-secondary)' }}>📞 +91 9152559833</p>
                         <p style={{ color: 'var(--fg-secondary)' }}>📍 {t('footer.addressVal')}</p>
                     </div>
@@ -66,13 +66,13 @@ export const Footer: React.FC = () => {
                             allowFullScreen={true}
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            title="Healing With Shilpi"
+                            title="Healings By Shilpi"
                         ></iframe>
                     </div>
                 </div>
 
                 <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '2rem', textAlign: 'center', color: 'var(--fg-secondary)', fontSize: '0.8rem' }}>
-                    © {new Date().getFullYear()} Mystic Pathways by Shilpi. {t('footer.copyright')}
+                    © {new Date().getFullYear()} Healings By Shilpi. {t('footer.copyright')}
                     <div style={{ marginTop: '0.5rem', opacity: 0.5 }}>Celestial Version 2.0.1</div>
                 </div>
             </div>

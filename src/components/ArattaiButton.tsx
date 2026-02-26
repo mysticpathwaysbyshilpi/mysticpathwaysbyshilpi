@@ -5,7 +5,7 @@ import React from 'react';
 export const ArattaiButton: React.FC = () => {
     return (
         <a
-            href="https://arattai.in/mysticpathwaysbyshilpi"
+            href="https://aratt.ai/@mystic_pathways_by_shilpi"
             target="_blank"
             rel="noopener noreferrer"
             style={{

@@ -7,7 +7,7 @@ import { ArattaiButton } from '../components/ArattaiButton';
 import { Footer } from '../components/Footer';
 
 export const metadata: Metadata = {
-  title: "Mystic Pathways by Shilpi | Reiki, Tarot & Numerology",
+  title: "Mystic Pathways by Shilpi | Reiki, Tarot & Numerology | Healings by Shilpi",
   description: "Experience spiritual clarity with professional Reiki healing, Tarot readings, and Numerology consultations. Holistic guidance for your unique journey.",
   keywords: ["Reiki", "Tarot", "Numerology", "Spiritual Healing", "Distance Reiki", "Numerologist", "Tarot Reader"],
 };
