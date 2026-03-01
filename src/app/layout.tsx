@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Experience spiritual clarity with professional Reiki healing, Tarot readings, and Numerology consultations. Holistic guidance for your unique journey.",
   keywords: ["Reiki", "Tarot", "Numerology", "Spiritual Healing", "Distance Reiki", "Numerologist", "Tarot Reader"],
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.ico?v=2',
   },
 };
 

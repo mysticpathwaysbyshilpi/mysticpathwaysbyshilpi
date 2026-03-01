@@ -13,6 +13,10 @@ export async function POST(req: Request) {
 
         const contactRequest = await ContactRequest.create(data);
 
+        // Send email notification asynchronously (don't block the response)
+        const { sendContactEmail } = await import('../../../lib/mail');
+        sendContactEmail(data).catch(err => console.error('Failed to send contact email:', err));
+
         return NextResponse.json({ success: true, data: contactRequest }, { status: 201 });
     } catch (error: any) {
         return NextResponse.json({ success: false, error: error.message }, { status: 400 });

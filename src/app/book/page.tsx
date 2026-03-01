@@ -30,15 +30,15 @@ export default function Book() {
                     const data = await res.json();
                     setDefaultLink(data.calComLink);
                     setMeetingTypes(data.meetingTypes || []);
-                    // If multiple types exist, don't set selectedLink yet to force choice
-                    if (!data.meetingTypes || data.meetingTypes.length === 0) {
+                    // Auto-select the default link on page load
+                    if (data.calComLink) {
                         setSelectedLink(data.calComLink);
                     }
                 }
             } catch (err) {
                 console.error('Failed to fetch booking settings:', err);
-                setDefaultLink('shilpi-mystic-pathways/session');
-                setSelectedLink('shilpi-mystic-pathways/session');
+                setDefaultLink('shilpi-agrawal-svgsap/healing-session');
+                setSelectedLink('shilpi-agrawal-svgsap/healing-session');
             } finally {
                 setLoading(false);
             }

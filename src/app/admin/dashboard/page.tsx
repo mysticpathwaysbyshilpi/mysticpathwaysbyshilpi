@@ -43,7 +43,7 @@ export default function AdminDashboard() {
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [view, setView] = useState<'active' | 'archived' | 'newsletter' | 'bookings'>('active');
-    const [counts, setCounts] = useState({ active: 0, archived: 0, bookings: 0 });
+    const [counts, setCounts] = useState({ active: 0, archived: 0, bookings: 0, newsletter: 0 });
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [sortField, setSortField] = useState('date');
@@ -172,6 +172,7 @@ export default function AdminDashboard() {
     const fetchData = async () => {
         setLoading(true);
         setSelectedIds([]);
+        setError('');
         try {
             if (view === 'newsletter') {
                 const res = await fetch(`/api/admin/newsletter?page=${currentPage}&limit=50`);
@@ -180,6 +181,10 @@ export default function AdminDashboard() {
                     setSubscribers(result.data);
                     setTotalPages(result.pagination.pages);
                     setNewsletterTotal(result.pagination.total);
+                    setCounts(prev => ({ ...prev, newsletter: result.pagination.total }));
+                } else {
+                    const errData = await res.json().catch(() => ({ error: 'Newsletter fetch failed' }));
+                    setError(errData.error || 'Newsletter circle could not be reached.');
                 }
             } else if (view === 'bookings') {
                 const res = await fetch(`/api/admin/bookings?page=${currentPage}&limit=20`);
@@ -188,6 +193,9 @@ export default function AdminDashboard() {
                     setBookings(result.data);
                     setTotalPages(result.pagination.pages);
                     setCounts(prev => ({ ...prev, bookings: result.pagination.total }));
+                } else {
+                    const errData = await res.json().catch(() => ({ error: 'Bookings fetch failed' }));
+                    setError(errData.error || 'Divine bookings could not be fetched.');
                 }
             } else {
                 const res = await fetch(`/api/admin/contacts?page=${currentPage}&limit=20&archived=${view === 'archived'}&sortField=${sortField}&sortOrder=${sortOrder}&search=${searchQuery}`);
@@ -195,22 +203,17 @@ export default function AdminDashboard() {
                     const result = await res.json();
                     setContacts(result.data);
                     setTotalPages(result.pagination.pages);
-                    // Update counts from API response metadata
                     if (result.counts) {
                         setCounts(prev => ({
                             ...prev,
                             active: result.counts.active,
-                            archived: result.counts.archived
+                            archived: result.counts.archived,
+                            bookings: result.counts.bookings || prev.bookings,
+                            newsletter: result.counts.newsletter || prev.newsletter
                         }));
                     }
                 } else {
-                    let errData;
-                    try {
-                        errData = await res.json();
-                    } catch (jsonErr) {
-                        setError(`Server error (${res.status}). Detailed logs may reveal more in Hostinger.`);
-                        return;
-                    }
+                    const errData = await res.json().catch(() => ({ error: 'Contacts fetch failed' }));
                     setError(errData.error || 'Divine scrolls could not be fetched.');
                 }
             }
@@ -245,9 +248,9 @@ export default function AdminDashboard() {
         if (!confirm(confirmMsg)) return;
 
         try {
-            const endpoint = view === 'newsletter' ? '/api/admin/newsletter' : '/api/admin/contacts/bulk';
-            const method = view === 'newsletter' ? 'DELETE' : 'POST';
-            const body = view === 'newsletter' ? { ids: selectedIds } : { ids: selectedIds, action };
+            const endpoint = view === 'newsletter' ? '/api/admin/newsletter' : view === 'bookings' ? '/api/admin/bookings' : '/api/admin/contacts/bulk';
+            const method = view === 'newsletter' || view === 'bookings' ? 'DELETE' : 'POST';
+            const body = view === 'newsletter' || view === 'bookings' ? { ids: selectedIds } : { ids: selectedIds, action };
 
             const res = await fetch(endpoint, {
                 method,
@@ -279,7 +282,7 @@ export default function AdminDashboard() {
 
         setLoading(true);
         try {
-            const endpoint = view === 'newsletter' ? '/api/admin/newsletter' : '/api/admin/contacts';
+            const endpoint = view === 'newsletter' ? '/api/admin/newsletter' : view === 'bookings' ? '/api/admin/bookings' : '/api/admin/contacts';
             const res = await fetch(`${endpoint}?limit=5000`);
             if (res.ok) {
                 const result = await res.json();
@@ -290,6 +293,11 @@ export default function AdminDashboard() {
                 if (view === 'newsletter') {
                     csvContent = "Date,Email\n" +
                         selectedData.map((s: Subscriber) => `"${new Date(s.subscribedAt).toLocaleString()}","${s.email}"`).join("\n");
+                } else if (view === 'bookings') {
+                    csvContent = "Start Time,End Time,Client Name,Client Email,Session Type,Status,Payment Status,Meeting Link\n" +
+                        selectedData.map((b: Booking) =>
+                            `"${new Date(b.startTime).toLocaleString()}","${new Date(b.endTime).toLocaleString()}","${b.clientName}","${b.clientEmail}","${b.sessionType}","${b.status}","${b.paymentStatus}","${b.meetingLink || ''}"`
+                        ).join("\n");
                 } else {
                     csvContent = "Date,Name,Email,Country Code,Phone,Message,Status,Notes\n" +
                         selectedData.map((c: ContactRequest) =>
@@ -315,7 +323,7 @@ export default function AdminDashboard() {
     };
 
     const toggleSelectAll = async () => {
-        const totalInView = view === 'newsletter' ? newsletterTotal : (view === 'active' ? counts.active : counts.archived);
+        const totalInView = view === 'newsletter' ? newsletterTotal : view === 'bookings' ? counts.bookings : (view === 'active' ? counts.active : counts.archived);
 
         if (selectedIds.length === totalInView && totalInView > 0) {
             setSelectedIds([]);
@@ -324,8 +332,8 @@ export default function AdminDashboard() {
 
         setLoading(true);
         try {
-            const endpoint = view === 'newsletter' ? '/api/admin/newsletter' : '/api/admin/contacts';
-            const params = view === 'newsletter' ? 'limit=5000' : `limit=5000&archived=${view === 'archived'}&search=${searchQuery}`;
+            const endpoint = view === 'newsletter' ? '/api/admin/newsletter' : view === 'bookings' ? '/api/admin/bookings' : '/api/admin/contacts';
+            const params = view === 'newsletter' || view === 'bookings' ? 'limit=5000' : `limit=5000&archived=${view === 'archived'}&search=${searchQuery}`;
             const res = await fetch(`${endpoint}?${params}`);
             if (res.ok) {
                 const result = await res.json();
@@ -435,6 +443,9 @@ export default function AdminDashboard() {
                             }}
                         >
                             Newsletter Circle 📧
+                            <span style={{ backgroundColor: view === 'newsletter' ? 'rgba(255,255,255,0.2)' : 'var(--border-light)', padding: '2px 8px', borderRadius: '6px', fontSize: '0.8rem' }}>
+                                {counts.newsletter}
+                            </span>
                         </button>
                         <button
                             onClick={() => handleViewChange('bookings')}
@@ -520,7 +531,7 @@ export default function AdminDashboard() {
                                             </button>
                                         ) : (
                                             <>
-                                                {view === 'active' ? (
+                                                {view === 'active' && (
                                                     <button
                                                         onClick={() => { handleBulkAction('archive'); setShowActionMenu(false); }}
                                                         className="btn btn-secondary"
@@ -528,7 +539,8 @@ export default function AdminDashboard() {
                                                     >
                                                         📦 Archive Selected
                                                     </button>
-                                                ) : (
+                                                )}
+                                                {view === 'archived' && (
                                                     <button
                                                         onClick={() => { handleBulkAction('restore'); setShowActionMenu(false); }}
                                                         className="btn btn-secondary"
@@ -618,6 +630,14 @@ export default function AdminDashboard() {
                         <table style={{ width: '100%', minWidth: '1000px', borderCollapse: 'collapse', textAlign: 'left' }}>
                             <thead>
                                 <tr style={{ backgroundColor: 'rgba(var(--accent-primary-rgb), 0.08)', borderBottom: '2px solid var(--accent-primary)' }}>
+                                    <th style={{ padding: '1.2rem 1rem', width: '40px' }}>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedIds.length === counts.bookings && counts.bookings > 0}
+                                            onChange={toggleSelectAll}
+                                            style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                                        />
+                                    </th>
                                     <th style={{ padding: '1.2rem 1rem', color: 'var(--accent-primary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Date & Time</th>
                                     <th style={{ padding: '1.2rem 1rem', color: 'var(--accent-primary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Seeker</th>
                                     <th style={{ padding: '1.2rem 1rem', color: 'var(--accent-primary)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Session Variant</th>
@@ -628,7 +648,15 @@ export default function AdminDashboard() {
                             </thead>
                             <tbody>
                                 {bookings.map((booking, index) => (
-                                    <tr key={booking._id} style={{ borderBottom: '1px solid var(--glass-border)', transition: '0.2s', backgroundColor: index % 2 === 0 ? 'transparent' : 'rgba(var(--accent-primary-rgb), 0.02)' }}>
+                                    <tr key={booking._id} style={{ borderBottom: '1px solid var(--glass-border)', transition: '0.2s', backgroundColor: selectedIds.includes(booking._id) ? 'rgba(var(--accent-primary-rgb), 0.12)' : index % 2 === 0 ? 'transparent' : 'rgba(var(--accent-primary-rgb), 0.02)' }}>
+                                        <td style={{ padding: '1rem' }}>
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedIds.includes(booking._id)}
+                                                onChange={() => toggleSelect(booking._id)}
+                                                style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                                            />
+                                        </td>
                                         <td style={{ padding: '1rem', fontSize: '0.85rem' }}>
                                             <div style={{ fontWeight: 600, color: 'var(--fg-primary)' }}>
                                                 {new Date(booking.startTime).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}

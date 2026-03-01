@@ -18,7 +18,7 @@ export async function GET() {
         });
 
         return NextResponse.json({
-            calComLink: result.calComLink || 'shilpi-mystic-pathways/session',
+            calComLink: result.calComLink || 'shilpi-agrawal-svgsap/healing-session',
             meetingTypes: result.meetingTypes || []
         });
     } catch (error) {

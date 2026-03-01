@@ -39,10 +39,14 @@ export async function GET(req: Request) {
         };
 
         // Multi-tasking counts
-        const [total, activeCount, archivedCount] = await Promise.all([
+        const Booking = (await import('../../../../models/Booking')).default;
+        const Newsletter = (await import('../../../../models/Newsletter')).default;
+        const [total, activeCount, archivedCount, bookingsCount, newsletterCount] = await Promise.all([
             ContactRequest.countDocuments(query),
             ContactRequest.countDocuments({ isArchived: { $ne: true }, ...searchFilter }),
-            ContactRequest.countDocuments({ isArchived: true, ...searchFilter })
+            ContactRequest.countDocuments({ isArchived: true, ...searchFilter }),
+            Booking.countDocuments(),
+            Newsletter.countDocuments()
         ]);
 
         const contacts = await ContactRequest.find(query)
@@ -55,7 +59,9 @@ export async function GET(req: Request) {
             data: contacts,
             counts: {
                 active: activeCount,
-                archived: archivedCount
+                archived: archivedCount,
+                bookings: bookingsCount,
+                newsletter: newsletterCount
             },
             pagination: {
                 total,
